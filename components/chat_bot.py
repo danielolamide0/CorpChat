@@ -59,13 +59,23 @@ def render_chat_bot():
             }
         }
         
+        # Convert DataFrame to CSV string for the full dataset
+        full_data_csv = df.to_csv(index=False)
+        
         # Add system message (not shown to user)
         st.session_state.system_message = (
-            "You are a helpful data analysis assistant. "
+            "You are a helpful data analysis assistant with full access to the user's dataset. "
             "You're helping the user analyze their data and suggest visualizations. "
             f"The current dataset has {df.shape[0]} rows and {df.shape[1]} columns. "
-            f"Here's information about the dataset: {json.dumps(data_info, default=str)}"
+            f"Here's information about the dataset structure: {json.dumps(data_info, default=str)}\n\n"
+            f"You have full access to the dataset to perform computations. "
+            f"The complete dataset in CSV format is provided below between triple backticks:\n"
+            f"```\n{full_data_csv}\n```\n\n"
+            f"You can use this data to perform calculations, find patterns, and provide detailed insights. "
+            f"When the user asks questions about the data, analyze the CSV data directly."
         )
+        # Reset messages when loading a new dataset or restarting
+        st.session_state.messages = []
         st.session_state.system_message_added = True
     
     # Chat input

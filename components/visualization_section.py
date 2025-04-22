@@ -70,7 +70,7 @@ def render_visualization_section():
         
         for i, viz in enumerate(st.session_state.visualizations):
             with st.expander(f"Visualization {i+1}: {viz['title']}", expanded=i == 0):
-                st.plotly_chart(viz['figure'], use_container_width=True)
+                st.plotly_chart(viz['figure'], use_container_width=True, key=f"viz_{i}")
                 
                 # Button to remove visualization
                 if st.button(f"Remove this visualization", key=f"remove_viz_{i}"):
