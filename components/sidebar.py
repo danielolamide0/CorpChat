@@ -76,6 +76,13 @@ def render_sidebar():
                 st.rerun()
             else:
                 st.info("Please upload data first")
+                
+        if st.button("Chat Bot", disabled=not tabs_enabled, key="nav_chatbot"):
+            if tabs_enabled:
+                st.session_state.current_tab = "Chat Bot"
+                st.rerun()
+            else:
+                st.info("Please upload data first")
         
         # Reset application
         st.markdown("---")
@@ -86,6 +93,10 @@ def render_sidebar():
             st.session_state.current_tab = "Upload"
             st.session_state.analysis_results = {}
             st.session_state.visualizations = []
+            if "messages" in st.session_state:
+                st.session_state.messages = []
+            if "system_message_added" in st.session_state:
+                del st.session_state.system_message_added
             st.rerun()
         
         # Display current data source info

@@ -5,6 +5,7 @@ from components.sidebar import render_sidebar
 from components.data_preview import render_data_preview
 from components.analysis_section import render_analysis_section
 from components.visualization_section import render_visualization_section
+from components.chat_bot import render_chat_bot, render_placeholder_chat_bot
 from utils.data_loader import load_sample_data, load_file, get_data_summary
 
 # Page configuration
@@ -39,6 +40,10 @@ if 'visualizations' not in st.session_state:
     st.session_state.visualizations = []
 if 'data_summary' not in st.session_state and st.session_state.data is not None:
     st.session_state.data_summary = get_data_summary(st.session_state.data)
+
+# Check if OpenAI API key is available
+if 'openai_api_key_available' not in st.session_state:
+    st.session_state.openai_api_key_available = os.environ.get("OPENAI_API_KEY") is not None
 
 # Main app header
 st.markdown("""
@@ -102,6 +107,16 @@ elif st.session_state.current_tab == "Visualization":
         render_visualization_section()
     else:
         st.warning("Please upload a file first to create visualizations.")
+        
+elif st.session_state.current_tab == "Chat Bot":
+    if st.session_state.data is not None:
+        # Check if we have an API key available
+        if st.session_state.get('openai_api_key_available', False):
+            render_chat_bot()
+        else:
+            render_placeholder_chat_bot()
+    else:
+        st.warning("Please upload a file first to use the chat assistant.")
 
 # Footer
 st.markdown("---")
