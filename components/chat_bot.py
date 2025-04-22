@@ -8,8 +8,7 @@ def render_chat_bot():
     """
     Render the chat bot interface for data analysis assistance
     """
-    st.header("📊 Business Analytics Assistant")
-    st.info("Get professional business insights from your data. Ask targeted questions to uncover actionable intelligence for decision-making.")
+    st.header("📊 Data Analysis Assistant")
     
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -65,22 +64,15 @@ def render_chat_bot():
         
         # Add system message (not shown to user)
         st.session_state.system_message = (
-            "You are a professional business intelligence assistant with full access to the user's dataset. "
-            "You're helping business users analyze their data efficiently with actionable insights. "
+            "You are a helpful data analysis assistant with full access to the user's dataset. "
+            "You're helping the user analyze their data and suggest visualizations. "
             f"The current dataset has {df.shape[0]} rows and {df.shape[1]} columns. "
             f"Here's information about the dataset structure: {json.dumps(data_info, default=str)}\n\n"
             f"You have full access to the dataset to perform computations. "
             f"The complete dataset in CSV format is provided below between triple backticks:\n"
             f"```\n{full_data_csv}\n```\n\n"
-            f"IMPORTANT RESPONSE GUIDELINES:\n"
-            f"1. Be extremely concise and professional in your responses\n"
-            f"2. Present your answers with minimal explanation - focus on key insights\n"
-            f"3. Use business terminology and metrics whenever possible\n"
-            f"4. Format responses with bullet points and clear headings\n"
-            f"5. Include percentages alongside raw numbers when relevant\n"
-            f"6. Prioritize actionable business insights over detailed explanations\n"
-            f"7. When possible, suggest a business action based on the findings\n"
-            f"This is for business professionals who need clear, direct answers."
+            f"You can use this data to perform calculations, find patterns, and provide detailed insights. "
+            f"When the user asks questions about the data, analyze the CSV data directly."
         )
         # Reset messages when loading a new dataset or restarting
         st.session_state.messages = []
@@ -137,8 +129,8 @@ def render_placeholder_chat_bot():
     """
     Render a placeholder for the chat bot before API keys are set up
     """
-    st.header("📊 Business Analytics Assistant")
-    st.info("Get professional business insights from your data. Ask targeted questions to uncover actionable intelligence for decision-making.")
+    st.header("📊 Data Analysis Assistant")
+    st.info("This feature will allow you to chat with an AI assistant about your data.")
     
     # Check if we have data loaded
     if st.session_state.data is None:
@@ -174,14 +166,15 @@ def render_placeholder_chat_bot():
     
     with st.chat_message("assistant"):
         st.markdown("""
-        ### Sales Performance Analysis
+        Based on the sales data you've uploaded, I can see several trends:
         
-        **Key Findings:**
-        * **Product Mix:** Electronics dominate (63% of revenue), Furniture (30%), Clothing (7%)
-        * **Regional Distribution:** North region leads (38%), followed by West (30%)
-        * **Seasonality:** Q2 shows 27% higher sales than Q1, with peak months in March and July
+        1. **Product Categories**: Electronics has the highest total sales at $11,403, followed by Furniture at $5,477 and Clothing at $1,393.
         
-        **Recommendation:** Increase electronics inventory in North region for Q2 to capitalize on strongest market segment.
+        2. **Regional Performance**: The North region leads in sales with $6,918, followed by West with $5,462.
+        
+        3. **Time Trends**: Sales peaked in March and July, with a notable increase in Q2.
+        
+        Would you like me to create a visualization to better illustrate any of these trends?
         """)
     
     # API Key Setup
