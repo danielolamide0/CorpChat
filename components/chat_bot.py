@@ -2,7 +2,151 @@ import streamlit as st
 import pandas as pd
 import json
 import os
+import re
 from openai import OpenAI
+from utils.data_visualization import (
+    create_bar_chart, create_line_chart, create_scatter_plot,
+    create_histogram, create_pie_chart, create_heatmap,
+    create_box_plot, create_correlation_heatmap
+)
+
+def detect_visualization_request(prompt):
+    """
+    Detect if a user prompt is requesting a visualization
+    
+    Returns:
+    - (chart_type, params) tuple if visualization is requested, (None, None) otherwise
+    """
+    # Common patterns for visualization requests
+    patterns = {
+        'bar chart': r'(?:create|show|generate|display).*(?:bar chart|bar graph|column chart)',
+        'line chart': r'(?:create|show|generate|display).*(?:line chart|line graph|trend)',
+        'scatter plot': r'(?:create|show|generate|display).*(?:scatter plot|scatter graph|scatterplot)',
+        'histogram': r'(?:create|show|generate|display).*(?:histogram|distribution)',
+        'pie chart': r'(?:create|show|generate|display).*(?:pie chart|pie graph)',
+        'heatmap': r'(?:create|show|generate|display).*(?:heatmap|heat map|correlation map)',
+        'box plot': r'(?:create|show|generate|display).*(?:box plot|boxplot|box and whisker)',
+        'correlation': r'(?:create|show|generate|display).*(?:correlation matrix|correlation heatmap)'
+    }
+    
+    # Check for matches
+    for chart_type, pattern in patterns.items():
+        if re.search(pattern, prompt, re.IGNORECASE):
+            return chart_type, None
+    
+    return None, None
+
+def create_visualization_from_response(response, chart_type=None):
+    """
+    Attempt to create a visualization based on the AI response or detected chart type
+    
+    Parameters:
+    - response: The AI response text
+    - chart_type: Previously detected chart type (optional)
+    
+    Returns:
+    - Plotly figure or None if no visualization could be created
+    """
+    df = st.session_state.data
+    
+    # If chart type wasn't detected in the prompt, try to detect it in the response
+    if chart_type is None:
+        # Look for specific visualization keywords in the response
+        if re.search(r'bar chart|bar graph|column chart', response, re.IGNORECASE):
+            chart_type = 'bar chart'
+        elif re.search(r'line chart|line graph|trend line', response, re.IGNORECASE):
+            chart_type = 'line chart'
+        elif re.search(r'scatter plot|scatter graph|scatterplot', response, re.IGNORECASE):
+            chart_type = 'scatter plot'
+        elif re.search(r'histogram|distribution chart', response, re.IGNORECASE):
+            chart_type = 'histogram'
+        elif re.search(r'pie chart|pie graph', response, re.IGNORECASE):
+            chart_type = 'pie chart'
+        elif re.search(r'heatmap|heat map', response, re.IGNORECASE):
+            chart_type = 'heatmap'
+        elif re.search(r'box plot|boxplot', response, re.IGNORECASE):
+            chart_type = 'box plot'
+        elif re.search(r'correlation matrix|correlation heatmap', response, re.IGNORECASE):
+            chart_type = 'correlation'
+    
+    if chart_type is None:
+        return None
+    
+    # Extract column names from the response or use defaults
+    numeric_columns = [col for col in df.columns if pd.api.types.is_numeric_dtype(df[col])]
+    categorical_columns = [col for col in df.columns if not pd.api.types.is_numeric_dtype(df[col])]
+    
+    if not numeric_columns:
+        return None  # Can't create visualization without numeric data
+    
+    # Default to first columns if we can't extract specific ones
+    x_column = categorical_columns[0] if categorical_columns else numeric_columns[0]
+    y_column = numeric_columns[0]
+    
+    # Try to extract column names from the response using regex
+    # This is a simplified approach - in a production environment you'd want more robust parsing
+    columns_mentioned = []
+    for col in df.columns:
+        if re.search(r'\b' + re.escape(col) + r'\b', response, re.IGNORECASE):
+            columns_mentioned.append(col)
+    
+    # Use mentioned columns if found
+    if len(columns_mentioned) >= 2:
+        # Prefer categorical for x and numeric for y
+        x_candidates = [col for col in columns_mentioned if col in categorical_columns]
+        y_candidates = [col for col in columns_mentioned if col in numeric_columns]
+        
+        if x_candidates:
+            x_column = x_candidates[0]
+        else:
+            x_column = columns_mentioned[0]
+            
+        if y_candidates:
+            y_column = y_candidates[0]
+        else:
+            y_column = columns_mentioned[1]
+    elif len(columns_mentioned) == 1:
+        # If only one column is mentioned, use it as y for most charts
+        if columns_mentioned[0] in numeric_columns:
+            y_column = columns_mentioned[0]
+        else:
+            x_column = columns_mentioned[0]
+    
+    # Create visualization based on chart type
+    try:
+        title = f"Auto-generated {chart_type.title()} for {x_column} and {y_column}"
+        
+        if chart_type == 'bar chart':
+            return create_bar_chart(df, x_column, y_column, title=title)
+        
+        elif chart_type == 'line chart':
+            return create_line_chart(df, x_column, [y_column], title=title)
+        
+        elif chart_type == 'scatter plot':
+            return create_scatter_plot(df, x_column, y_column, title=title)
+        
+        elif chart_type == 'histogram':
+            return create_histogram(df, y_column, title=f"Distribution of {y_column}")
+        
+        elif chart_type == 'pie chart':
+            return create_pie_chart(df, x_column, y_column, title=f"Proportion of {y_column} by {x_column}")
+        
+        elif chart_type == 'heatmap':
+            if len(numeric_columns) >= 2:
+                return create_heatmap(df, x_column, numeric_columns[1], y_column, title=title)
+            return None
+        
+        elif chart_type == 'box plot':
+            return create_box_plot(df, x_column, y_column, title=title)
+        
+        elif chart_type == 'correlation':
+            return create_correlation_heatmap(df, title="Correlation Matrix")
+        
+    except Exception as e:
+        st.error(f"Error creating visualization: {str(e)}")
+        return None
+    
+    return None
 
 def render_chat_bot():
     """
@@ -70,6 +214,12 @@ def render_chat_bot():
             f"Dataset structure: {json.dumps(data_info, default=str)}\n\n"
             f"The complete dataset is provided below:\n"
             f"```\n{full_data_csv}\n```\n\n"
+            f"VISUALIZATION CAPABILITIES:\n"
+            f"You can create visualizations for users when they request them. If a user asks for a chart or graph, "
+            f"clearly recommend a specific visualization type (bar chart, line chart, scatter plot, histogram, pie chart, "
+            f"heatmap, box plot, or correlation matrix) and mention which columns should be used. "
+            f"When recommending visualizations, always specify column names exactly as they appear in the dataset. "
+            f"The system will automatically generate the visualization based on your recommendation.\n\n"
             f"KEY INSTRUCTIONS:\n"
             f"1. Be extremely concise - executives value brevity\n"
             f"2. Prioritize key insights over exhaustive details\n"
@@ -78,6 +228,7 @@ def render_chat_bot():
             f"5. Recommend clear actions when appropriate\n"
             f"6. Include only relevant data points\n"
             f"7. Present insights with confidence and authority\n"
+            f"8. When users ask for visualizations, recommend specific chart types and columns\n"
             f"When analyzing numerical data, round to 2 decimal places unless precision is critical."
         )
         # Reset messages when loading a new dataset or restarting
@@ -86,6 +237,9 @@ def render_chat_bot():
     
     # Chat input
     if prompt := st.chat_input("Ask a business question about your data..."):
+        # Check if user is requesting a visualization directly
+        vis_type, vis_params = detect_visualization_request(prompt)
+        
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         
@@ -117,6 +271,38 @@ def render_chat_bot():
                         message_placeholder.markdown(full_response + "▌")
                 
                 message_placeholder.markdown(full_response)
+                
+                # Try to generate visualization based on:
+                # 1. Direct visualization request from user
+                # 2. Or visualization mentioned in the AI response
+                fig = None
+                if vis_type:
+                    # Direct request - generate visualization based on user request
+                    fig = create_visualization_from_response(full_response, vis_type)
+                else:
+                    # Check if AI response mentions visualization
+                    fig = create_visualization_from_response(full_response)
+                
+                # Display the visualization if one was created
+                if fig is not None:
+                    st.write("**Generated Visualization:**")
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Add this visualization to the saved visualizations
+                    # Extract a title from the chart or use a default
+                    title = fig.layout.title.text if hasattr(fig.layout, 'title') and hasattr(fig.layout.title, 'text') else "Chat-generated visualization"
+                    if not title or title == "":
+                        title = "Chat-generated visualization"
+                    
+                    # Store in session state 
+                    st.session_state.visualizations.append({
+                        "type": "chat_generated",
+                        "title": title,
+                        "figure": fig
+                    })
+                    
+                    # Let the user know the visualization was saved
+                    st.info("This visualization has been saved to your Visualization tab.")
                 
             except Exception as e:
                 error_message = f"Error: {str(e)}"
@@ -161,14 +347,14 @@ def render_placeholder_chat_bot():
     - Extract actionable business insights
     - Identify market opportunities and risks
     - Track KPIs and performance metrics
-    - Generate executive-ready reports
+    - Create visualizations directly from your questions
     - Recommend data-driven business strategies
     """)
     
     # Example chat interface (placeholder)
     st.subheader("Example Chat")
     with st.chat_message("user"):
-        st.markdown("What age group represents our primary customer base?")
+        st.markdown("What age group represents our primary customer base and can you create a visualization?")
     
     with st.chat_message("assistant"):
         st.markdown("""
@@ -181,7 +367,14 @@ def render_placeholder_chat_bot():
         
         **Recommended Action:**
         Focus marketing resources on the 25-34 demographic while developing retention strategies for the younger segment.
+        
+        **Visualization:**
+        I recommend a bar chart showing customer count by age group. This will help visualize the distribution of your customer base across different demographics.
         """)
+        
+    # Show example visualization below the chat
+    st.write("**Generated Visualization:**")
+    st.info("Visualizations will appear here when you ask for them in the chat.")
     
     # API Key Setup
     st.subheader("API Setup")
