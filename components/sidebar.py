@@ -77,7 +77,7 @@ def render_sidebar():
             else:
                 st.info("Please upload data first")
                 
-        if st.button("Chat Bot", disabled=not tabs_enabled, key="nav_chatbot"):
+        if st.button("Business AI", disabled=not tabs_enabled, key="nav_chatbot"):
             if tabs_enabled:
                 st.session_state.current_tab = "Chat Bot"
                 st.rerun()
