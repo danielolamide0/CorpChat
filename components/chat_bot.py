@@ -8,7 +8,7 @@ def render_chat_bot():
     """
     Render the chat bot interface for data analysis assistance
     """
-    st.header("📊 Data Analysis Assistant")
+    st.header("📊 Business Intelligence Assistant")
     
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -64,22 +64,28 @@ def render_chat_bot():
         
         # Add system message (not shown to user)
         st.session_state.system_message = (
-            "You are a helpful data analysis assistant with full access to the user's dataset. "
-            "You're helping the user analyze their data and suggest visualizations. "
+            "You are a professional business intelligence analyst providing concise, actionable insights to executives. "
+            "Maintain a business-focused, direct communication style appropriate for busy professionals. "
             f"The current dataset has {df.shape[0]} rows and {df.shape[1]} columns. "
-            f"Here's information about the dataset structure: {json.dumps(data_info, default=str)}\n\n"
-            f"You have full access to the dataset to perform computations. "
-            f"The complete dataset in CSV format is provided below between triple backticks:\n"
+            f"Dataset structure: {json.dumps(data_info, default=str)}\n\n"
+            f"The complete dataset is provided below:\n"
             f"```\n{full_data_csv}\n```\n\n"
-            f"You can use this data to perform calculations, find patterns, and provide detailed insights. "
-            f"When the user asks questions about the data, analyze the CSV data directly."
+            f"KEY INSTRUCTIONS:\n"
+            f"1. Be extremely concise - executives value brevity\n"
+            f"2. Prioritize key insights over exhaustive details\n"
+            f"3. Present information in a structured, scannable format\n"
+            f"4. Use professional business language\n"
+            f"5. Recommend clear actions when appropriate\n"
+            f"6. Include only relevant data points\n"
+            f"7. Present insights with confidence and authority\n"
+            f"When analyzing numerical data, round to 2 decimal places unless precision is critical."
         )
         # Reset messages when loading a new dataset or restarting
         st.session_state.messages = []
         st.session_state.system_message_added = True
     
     # Chat input
-    if prompt := st.chat_input("Ask me about your data..."):
+    if prompt := st.chat_input("Ask a business question about your data..."):
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         
@@ -129,8 +135,8 @@ def render_placeholder_chat_bot():
     """
     Render a placeholder for the chat bot before API keys are set up
     """
-    st.header("📊 Data Analysis Assistant")
-    st.info("This feature will allow you to chat with an AI assistant about your data.")
+    st.header("📊 Business Intelligence Assistant")
+    st.info("This AI-powered assistant provides concise business insights and actionable recommendations from your data.")
     
     # Check if we have data loaded
     if st.session_state.data is None:
@@ -150,31 +156,31 @@ def render_placeholder_chat_bot():
     except Exception as e:
         st.error(f"Error displaying data preview: {str(e)}")
         
-    st.write("Once configured, the assistant can help you with:")
+    st.write("This business intelligence assistant will help you:")
     st.markdown("""
-    - Exploring and understanding your data
-    - Suggesting appropriate visualizations
-    - Explaining patterns and trends
-    - Answering questions about your dataset
-    - Providing insights and recommendations
+    - Extract actionable business insights
+    - Identify market opportunities and risks
+    - Track KPIs and performance metrics
+    - Generate executive-ready reports
+    - Recommend data-driven business strategies
     """)
     
     # Example chat interface (placeholder)
     st.subheader("Example Chat")
     with st.chat_message("user"):
-        st.markdown("What are the main trends in the sales data?")
+        st.markdown("What age group represents our primary customer base?")
     
     with st.chat_message("assistant"):
         st.markdown("""
-        Based on the sales data you've uploaded, I can see several trends:
+        **Key Customer Demographic: 25-34 age group**
         
-        1. **Product Categories**: Electronics has the highest total sales at $11,403, followed by Furniture at $5,477 and Clothing at $1,393.
+        Primary customer base breakdown:
+        • 25-34: 30% (8 customers)
+        • 18-24: 22% (6 customers)
+        • 35-44: 22% (6 customers)
         
-        2. **Regional Performance**: The North region leads in sales with $6,918, followed by West with $5,462.
-        
-        3. **Time Trends**: Sales peaked in March and July, with a notable increase in Q2.
-        
-        Would you like me to create a visualization to better illustrate any of these trends?
+        **Recommended Action:**
+        Focus marketing resources on the 25-34 demographic while developing retention strategies for the younger segment.
         """)
     
     # API Key Setup
