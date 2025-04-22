@@ -26,14 +26,16 @@ def render_chat_bot():
     
     # Check if OpenAI API key is available
     api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key:
+    if not api_key or api_key == "":
         st.warning(
             "OpenAI API key not found. Please provide your API key to use the chat assistant."
         )
         api_key = st.text_input("OpenAI API Key", type="password")
-        if api_key:
+        if api_key and api_key.strip() != "":
             os.environ["OPENAI_API_KEY"] = api_key
+            st.session_state.openai_api_key_available = True
             st.success("API key set successfully!")
+            st.rerun()
         else:
             return
     
@@ -137,7 +139,7 @@ def render_placeholder_chat_bot():
         st.dataframe(df.head(3))
     except Exception as e:
         st.error(f"Error displaying data preview: {str(e)}")
-    
+        
     st.write("Once configured, the assistant can help you with:")
     st.markdown("""
     - Exploring and understanding your data
@@ -170,7 +172,9 @@ def render_placeholder_chat_bot():
     st.warning("To enable this feature, you'll need to provide an OpenAI API key.")
     
     api_key = st.text_input("OpenAI API Key", type="password", help="Enter your OpenAI API key to enable the chat assistant")
-    if api_key:
+    if api_key and api_key.strip() != "":
         if st.button("Save API Key"):
             os.environ["OPENAI_API_KEY"] = api_key
-            st.success("API key saved successfully! Refresh to use the chat assistant.")
+            st.session_state.openai_api_key_available = True
+            st.success("API key saved successfully!")
+            st.rerun()

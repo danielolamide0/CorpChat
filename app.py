@@ -43,7 +43,8 @@ if 'data_summary' not in st.session_state and st.session_state.data is not None:
 
 # Check if OpenAI API key is available
 if 'openai_api_key_available' not in st.session_state:
-    st.session_state.openai_api_key_available = os.environ.get("OPENAI_API_KEY") is not None
+    api_key = os.environ.get("OPENAI_API_KEY")
+    st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
 # Main app header
 st.markdown("""
