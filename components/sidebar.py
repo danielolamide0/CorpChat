@@ -8,6 +8,8 @@ def render_sidebar():
     """
     with st.sidebar:
         st.image("assets/app_logo.svg", width=50)
+        st.title("CorpChat Analytics")
+        st.caption("by SynaptideAI")
         st.title("Navigation")
         
         # File upload section
