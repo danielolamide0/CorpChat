@@ -56,8 +56,13 @@ st.markdown(f"""
             color: {'#ffffff' if theme == 'dark' else '#0e1117'};
         }}
         .stMarkdown, .css-10trblm, .css-183lzff, .css-1aehpvj, .css-16idsys p, 
-        .stMarkdown p, .css-j7qwjs, .css-pkbazv, .css-1vbkxwb p {{
+        .stMarkdown p, .css-j7qwjs, .css-pkbazv, .css-1vbkxwb p,
+        .css-1p0mkd2, .css-7oyrr6, .css-1mbgq5q, .css-81oif8,
+        .css-16idsys, .css-qcr4dx {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        [data-testid="stSidebarNav"] svg {{
+            fill: {'#ffffff' if theme == 'dark' else '#0e1117'};
         }}
         [data-testid="stSidebarNav"] {{
             background: {'#262730' if theme == 'dark' else '#ffffff'};
