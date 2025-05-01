@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+from streamlit.components.v1 import html
 from components.sidebar import render_sidebar
 from components.data_preview import render_data_preview
 from components.analysis_section import render_analysis_section
@@ -45,6 +46,17 @@ if 'data_summary' not in st.session_state and st.session_state.data is not None:
 if 'openai_api_key_available' not in st.session_state:
     api_key = os.environ.get("OPENAI_API_KEY")
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
+
+# Theme toggle
+theme = 'light' if st.sidebar.toggle('Enable Dark Mode') else 'dark'
+st.markdown(f"""
+    <style>
+        [data-testid="stAppViewContainer"] {{
+            background: {'#0e1117' if theme == 'dark' else '#ffffff'};
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'};
+        }}
+    </style>
+""", unsafe_allow_html=True)
 
 # Main app header
 st.markdown("""
