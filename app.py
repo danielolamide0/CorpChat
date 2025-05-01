@@ -51,21 +51,21 @@ if 'openai_api_key_available' not in st.session_state:
 theme = 'dark' if st.sidebar.toggle('Enable Dark Mode') else 'light'
 st.markdown(f"""
     <style>
-        [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {{
+        .stApp {{
             background: {'#0e1117' if theme == 'dark' else '#ffffff'};
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'};
         }}
-        .stMarkdown, .css-10trblm, .css-183lzff, .css-1aehpvj, .css-16idsys p, 
-        .stMarkdown p, .css-j7qwjs, .css-pkbazv, .css-1vbkxwb p,
-        .css-1p0mkd2, .css-7oyrr6, .css-1mbgq5q, .css-81oif8,
-        .css-16idsys, .css-qcr4dx {{
+        div[class*="css"] {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
-        [data-testid="stSidebarNav"] svg {{
-            fill: {'#ffffff' if theme == 'dark' else '#0e1117'};
+        div[data-testid*="stToolbar"] {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
-        [data-testid="stSidebarNav"] {{
+        div[data-testid="stSidebar"] {{
             background: {'#262730' if theme == 'dark' else '#ffffff'};
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        .stMarkdown, label, p, span {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
         .stButton > button {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'};
