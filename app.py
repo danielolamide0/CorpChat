@@ -55,7 +55,8 @@ st.markdown(f"""
             background: {'#0e1117' if theme == 'dark' else '#ffffff'};
             color: {'#ffffff' if theme == 'dark' else '#0e1117'};
         }}
-        .stMarkdown, .css-10trblm, .css-183lzff {{
+        .stMarkdown, .css-10trblm, .css-183lzff, .css-1aehpvj, .css-16idsys p, 
+        .stMarkdown p, .css-j7qwjs, .css-pkbazv, .css-1vbkxwb p {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
         [data-testid="stSidebarNav"] {{
@@ -67,6 +68,15 @@ st.markdown(f"""
             border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
         }}
         .streamlit-expanderHeader {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        div[data-testid="stFileUploadDropzone"] span, .stSlider span {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        .st-bq {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        .css-81oif8 {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
     </style>
