@@ -48,12 +48,26 @@ if 'openai_api_key_available' not in st.session_state:
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
 # Theme toggle
-theme = 'light' if st.sidebar.toggle('Enable Dark Mode') else 'dark'
+theme = 'dark' if st.sidebar.toggle('Enable Dark Mode') else 'light'
 st.markdown(f"""
     <style>
-        [data-testid="stAppViewContainer"] {{
+        [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {{
             background: {'#0e1117' if theme == 'dark' else '#ffffff'};
             color: {'#ffffff' if theme == 'dark' else '#0e1117'};
+        }}
+        .stMarkdown, .css-10trblm, .css-183lzff {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        }}
+        [data-testid="stSidebarNav"] {{
+            background: {'#262730' if theme == 'dark' else '#ffffff'};
+        }}
+        .stButton > button {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'};
+            background: {'#262730' if theme == 'dark' else '#ffffff'};
+            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+        }}
+        .streamlit-expanderHeader {{
+            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
         }}
     </style>
 """, unsafe_allow_html=True)
