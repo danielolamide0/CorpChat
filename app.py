@@ -346,10 +346,10 @@ elif st.session_state.current_tab == "Analysis":
     else:
         # Modern styled warning
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500;">Please upload a data file first to perform analysis.</span>
+                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to perform analysis.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -360,10 +360,10 @@ elif st.session_state.current_tab == "Visualization":
     else:
         # Modern styled warning
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500;">Please upload a data file first to create visualizations.</span>
+                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to create visualizations.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -378,22 +378,22 @@ elif st.session_state.current_tab == "Chat Bot":
     else:
         # Modern styled warning
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500;">Please upload a data file first to use the AI assistant.</span>
+                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to use the AI assistant.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
 # Modern footer with subtle gradient
 st.markdown("""
-<div style="margin-top: 50px; padding: 20px; border-radius: 10px; background: linear-gradient(90deg, #f0f7ff 0%, #ffffff 100%); text-align: center;">
+<div style="margin-top: 50px; padding: 20px; border-radius: 10px; background: linear-gradient(90deg, rgba(23, 58, 130, 0.3) 0%, rgba(30, 30, 30, 0.5) 100%); text-align: center; border: 1px solid rgba(79, 139, 249, 0.2);">
     <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
         <span style="font-size: 22px;">📊</span>
-        <span style="font-weight: 600; color: #4F8BF9;">DataViz Analytics Dashboard</span>
+        <span style="font-weight: 600; color: white;">DataViz Analytics Dashboard</span>
     </div>
-    <p style="margin: 0; font-size: 14px; color: #718096;">
+    <p style="margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.7);">
         Built with Streamlit • Modern Data Analysis • <a href="#" style="color: #4F8BF9; text-decoration: none;">Documentation</a>
     </p>
 </div>
