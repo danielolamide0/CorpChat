@@ -3,15 +3,23 @@ import pandas as pd
 import os
 import base64
 from streamlit.components.v1 import html
+import time
+from datetime import datetime
 
 # Function to convert image to base64 for embedding in CSS
 def get_base64_of_file(file_path):
-    with open(file_path, "rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+    """Convert file to base64 encoded string for embedding in HTML/CSS"""
+    try:
+        with open(file_path, "rb") as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except Exception as e:
+        st.error(f"Error loading file {file_path}: {e}")
+        return ""
 
 # Function to set background image
 def set_background(background_image_path):
+    """Apply a background image to the Streamlit app"""
     background_base64 = get_base64_of_file(background_image_path)
     st.markdown(
         f"""
@@ -82,8 +90,8 @@ if 'openai_api_key_available' not in st.session_state:
     api_key = os.environ.get("OPENAI_API_KEY")
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
-# Apply the data visualization background image
-background_image_path = './assets/background.svg'
+# Apply the modern background image
+background_image_path = './assets/modern_background.svg'
 if os.path.exists(background_image_path):
     set_background(background_image_path)
 
@@ -128,17 +136,57 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# Main app header with a modern design
+# Use the above get_base64_of_file function
+# Professional header inspired by modern analytics dashboards
 st.markdown("""
-<div style="background-color:#4F8BF9; padding:1.5rem; border-radius:10px; margin-bottom:20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    <h1 style="color:white; margin:0; display:flex; align-items:center; gap:10px;">
-        <span>📊</span> Data Analysis & Visualization Dashboard
-    </h1>
-    <p style="color:white; margin-top:10px; font-size:1.1rem; opacity:0.9;">
-        Upload your data, analyze patterns, and create insightful visualizations all in one place.
-    </p>
+<div class="page-header">
+    <div>
+        <h1>
+            <span style="font-size:28px; margin-right:10px;">📊</span>
+            Data Analytics Platform
+        </h1>
+        <p class="page-header-description">
+            Transform your data into actionable insights with powerful analytics and visualizations
+        </p>
+    </div>
+    <div>
+        <div style="background-color:rgba(0,0,0,0.2); border-radius:8px; padding:6px 10px; font-size:12px; color:rgba(255,255,255,0.8);">
+            <span style="font-weight:600;">Last updated:</span> 
+            {} 
+        </div>
+    </div>
 </div>
-""", unsafe_allow_html=True)
+""".format(datetime.now().strftime("%b %d, %Y")), unsafe_allow_html=True)
+
+# Add key metrics bar if data is loaded
+if st.session_state.data is not None and hasattr(st.session_state, 'data_summary') and st.session_state.data_summary:
+    summary = st.session_state.data_summary
+    
+    st.markdown("""
+    <div class="metrics-container">
+        <div class="metric-card">
+            <div class="metric-value">{}</div>
+            <div class="metric-label">Rows</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">{}</div>
+            <div class="metric-label">Columns</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">{}</div>
+            <div class="metric-label">Missing Values</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">{:.1f} MB</div>
+            <div class="metric-label">Memory Usage</div>
+        </div>
+    </div>
+    """.format(
+        summary.get('rows', 0),
+        summary.get('columns', 0),
+        summary.get('missing_values', 0),
+        summary.get('memory_usage', 0)
+    ), unsafe_allow_html=True)
 
 # Render sidebar (file upload and navigation)
 render_sidebar()
@@ -148,80 +196,147 @@ if st.session_state.current_tab == "Upload":
     if st.session_state.data is not None:
         render_data_preview()
     else:
-        # Modern info box
+        # Welcome banner with call to action
         st.markdown("""
-        <div style="padding:15px; border-radius:10px; background-color:#f0f7ff; border-left:5px solid #4F8BF9; margin-bottom:25px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size:24px;">👆</span>
-                <span style="font-size:16px; font-weight:500;">Upload a CSV or Excel file using the sidebar to get started.</span>
+        <div class="dashboard-card" style="background-color:rgba(23, 58, 130, 0.7); margin-bottom:30px; border:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                <div style="max-width:70%;">
+                    <h2 style="color:white; margin-top:0; font-size:1.6rem; font-weight:600;">
+                        Welcome to DataViz Analytics Platform
+                    </h2>
+                    <p style="color:rgba(255,255,255,0.9); margin-bottom:20px; font-size:1rem; line-height:1.5;">
+                        A comprehensive solution for analyzing, visualizing, and extracting insights from your data. 
+                        Built with modern technology and designed for business professionals.
+                    </p>
+                    <div style="background-color:rgba(79, 139, 249, 0.3); border:1px solid rgba(79, 139, 249, 0.5); 
+                        border-radius:6px; padding:10px; margin-bottom:10px; display:inline-flex; align-items:center; gap:8px;">
+                        <span style="font-size:18px;">👆</span>
+                        <span style="color:white; font-size:0.9rem;">Upload a file using the sidebar to get started</span>
+                    </div>
+                </div>
+                <div style="min-width:150px; text-align:center;">
+                    <img src="data:image/svg+xml;base64,{}" width="130" height="130">
+                </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """.format(get_base64_of_file("assets/modern_logo.svg")), unsafe_allow_html=True)
         
-        # Feature cards with modern design
+        # Feature grid layout inspired by modern analytics dashboards
         st.markdown("""
-        <h2 style="margin-bottom:20px; font-size:24px; font-weight:600;">Welcome to Your Data Analysis Platform</h2>
+        <h3 style="margin-bottom:20px; font-size:1.3rem; font-weight:600; color:white;">
+            Key Features & Capabilities
+        </h3>
         """, unsafe_allow_html=True)
-        
-        # Modern cards layout
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown("""
-            <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
-                <h3 style="color:#4F8BF9; margin-top:0;">🔍 Powerful Data Analysis</h3>
-                <ul style="padding-left:20px;">
-                    <li><strong>Process</strong> CSV and Excel files</li>
-                    <li><strong>Filter</strong> and transform your data</li>
-                    <li><strong>Calculate</strong> advanced statistics</li>
-                    <li><strong>Clean</strong> messy data automatically</li>
-                    <li><strong>Handle</strong> large datasets efficiently</li>
-                    <li><strong>Export</strong> analysis results</li>
-                </ul>
+
+        # Feature cards in a grid layout
+        st.markdown("""
+        <div class="feature-cards-container">
+            <div class="feature-card">
+                <div class="feature-card-icon">📈</div>
+                <div class="feature-card-title">Data Analysis</div>
+                <div class="feature-card-description">
+                    Analyze trends, detect patterns, and calculate statistics with powerful analytical tools. Filter and transform your data with ease.
+                </div>
             </div>
-            """, unsafe_allow_html=True)
             
-        with col2:
-            st.markdown("""
-            <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
-                <h3 style="color:#4F8BF9; margin-top:0;">📊 Interactive Visualizations</h3>
-                <ul style="padding-left:20px;">
-                    <li><strong>Bar charts</strong> for categorical data</li>
-                    <li><strong>Line charts</strong> for time series</li>
-                    <li><strong>Scatter plots</strong> for correlations</li>
-                    <li><strong>Histograms</strong> for distributions</li>
-                    <li><strong>Pie charts</strong> for proportions</li>
-                    <li><strong>Heatmaps, box plots</strong> and more</li>
-                </ul>
+            <div class="feature-card">
+                <div class="feature-card-icon">📊</div>
+                <div class="feature-card-title">Visualizations</div>
+                <div class="feature-card-description">
+                    Create stunning charts, graphs, and plots with our interactive visualization tools. Choose from bar charts, line charts, scatter plots, and more.
+                </div>
             </div>
-            """, unsafe_allow_html=True)
-        
-        # AI Assistant card
-        st.markdown("""
-        <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
-            <h3 style="color:#4F8BF9; margin-top:0;">🤖 AI-Powered Business Intelligence</h3>
-            <p>Ask questions about your data using natural language and get instant insights. The AI assistant can:</p>
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;">
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📝 Summarize key trends</div>
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">🔍 Identify outliers</div>
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📊 Create visualizations</div>
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">💡 Recommend actions</div>
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📈 Forecast trends</div>
-                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">🧮 Perform calculations</div>
+            
+            <div class="feature-card">
+                <div class="feature-card-icon">🧹</div>
+                <div class="feature-card-title">Data Cleaning</div>
+                <div class="feature-card-description">
+                    Clean and preprocess your data with automated tools for handling missing values, outliers, and inconsistencies.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card-icon">🤖</div>
+                <div class="feature-card-title">AI Assistant</div>
+                <div class="feature-card-description">
+                    Ask questions in natural language to get insights, summaries, and visualizations automatically generated by our AI.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card-icon">📱</div>
+                <div class="feature-card-title">Responsive Design</div>
+                <div class="feature-card-description">
+                    Access your analytics from any device with our fully responsive dashboard that adapts to your screen size.
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card-icon">🔄</div>
+                <div class="feature-card-title">Real-time Processing</div>
+                <div class="feature-card-description">
+                    Process and visualize your data in real-time with immediate feedback and interactive elements.
+                </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Upload Guidelines
+        # Supported file formats section
         st.markdown("""
-        <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
-            <h3 style="color:#4F8BF9; margin-top:0;">📁 File Upload Guidelines</h3>
-            <ul style="padding-left:20px;">
-                <li><strong>Supported formats:</strong> CSV (.csv) and Excel (.xlsx, .xls)</li>
-                <li><strong>Maximum file size:</strong> 200MB</li>
-                <li><strong>Structure:</strong> First row should contain column headers</li>
-                <li><strong>Large files:</strong> Use the sampling option for better performance</li>
-                <li><strong>Data types:</strong> Automatically detected for proper analysis</li>
-            </ul>
+        <div class="chart-container" style="margin-top:30px;">
+            <div class="chart-title">
+                <span class="chart-title-icon">📁</span> Supported File Formats
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
+                <div class="pill-tag" style="font-size:0.9rem;">CSV (.csv)</div>
+                <div class="pill-tag" style="font-size:0.9rem;">Excel (.xlsx)</div>
+                <div class="pill-tag" style="font-size:0.9rem;">Excel 97-2003 (.xls)</div>
+            </div>
+            <div style="margin-top:20px; color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.5;">
+                <p><strong>Guidelines:</strong></p>
+                <ul style="margin-top:5px; padding-left:20px;">
+                    <li>Files should have column headers in the first row</li>
+                    <li>Maximum file size: 200MB</li>
+                    <li>For large files, we recommend using the sampling option</li>
+                    <li>Data types are automatically detected for analysis</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # AI capabilities highlight
+        st.markdown("""
+        <div class="chart-container" style="margin-top:30px; background-color:rgba(79, 139, 249, 0.1); border:1px solid rgba(79, 139, 249, 0.2);">
+            <div class="chart-title">
+                <span class="chart-title-icon">🤖</span> AI-Powered Analytics
+            </div>
+            <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-top:15px;">
+                <div style="flex:1; min-width:200px;">
+                    <p style="color:rgba(255,255,255,0.8); font-size:0.95rem; line-height:1.6; margin-bottom:15px;">
+                        Our AI assistant can analyze your data and answer questions in natural language. Simply describe what you're looking for:
+                    </p>
+                    <div class="ai-message-container">
+                        <div class="ai-message-header">
+                            <div class="ai-avatar">AI</div>
+                            <strong style="color:white;">Sample AI Response</strong>
+                        </div>
+                        <div class="ai-message-content">
+                            "Based on your sales data, I've identified that the highest performing product category is 'Electronics' with 32% growth YoY. Here's a visualization of the trend."
+                        </div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                    <div style="background-color:rgba(0, 31, 84, 0.3); padding:15px; border-radius:8px; text-align:center;">
+                        <p style="color:white; font-weight:500; margin-bottom:15px;">Example Queries:</p>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <div class="pill-tag">"Show me the sales trend for last quarter"</div>
+                            <div class="pill-tag">"What's the correlation between price and reviews?"</div>
+                            <div class="pill-tag">"Identify outliers in the customer data"</div>
+                            <div class="pill-tag">"Create a visualization of market segments"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 

@@ -1,151 +1,552 @@
-/* Modern dashboard styling */
+/* Modern Professional Dashboard CSS - Inspired by Tableau, PowerBI, and other top analytics platforms */
 
-/* Main page container */
-.main .block-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
 }
 
-/* Headers */
 h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+/* App background styling with overlay */
+.stApp {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-h2 {
-    font-size: 1.8rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+/* Card styling for all containers */
+div.stButton > button, .stTextInput > div > div > input, .stSelectbox > div > div, .stFileUploader > div {
+    border-radius: 8px;
 }
 
-h3 {
-    font-size: 1.4rem;
-    margin-top: 1rem;
-    margin-bottom: 0.8rem;
+/* Modern card effect */
+div[data-testid="stExpander"] {
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 16px;
 }
 
-/* Cards for content sections */
-.stCard {
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+div[data-testid="stExpander"] > div {
+    border-radius: 10px;
 }
 
-.stCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
-}
-
-/* Button styling */
-.stButton > button {
-    border-radius: 0.375rem;
+div[data-testid="stExpander"] > div[role="button"] > div {
+    color: white !important;
     font-weight: 500;
+}
+
+/* Dashboard-style content cards */
+.dashboard-card {
+    background-color: rgba(0, 31, 84, 0.5);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(79, 139, 249, 0.1);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card h3 {
+    color: #4F8BF9;
+    margin-top: 0;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(79, 139, 249, 0.2);
+    margin-bottom: 16px;
+}
+
+/* Modern sidebar styling */
+div[data-testid="stSidebar"] {
+    background-color: rgba(10, 17, 40, 0.95);
+    border-right: 1px solid rgba(79, 139, 249, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+div[data-testid="stSidebar"] .stButton > button {
+    background-color: rgba(79, 139, 249, 0.1);
+    color: white;
+    border: none;
     transition: all 0.2s ease;
+    font-weight: 500;
 }
 
-.stButton > button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+div[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: rgba(79, 139, 249, 0.2);
+    transform: translateY(-2px);
 }
 
-/* Dataframe/table styling */
-.dataframe {
-    font-size: 0.875rem;
-    border-radius: 0.375rem;
-    overflow: hidden;
+div[data-testid="stSidebar"] .stButton > button:active {
+    transform: translateY(0);
 }
 
-.dataframe th {
-    background-color: #f4f7fa !important;
-    color: #4a5568 !important;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(79, 139, 249, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 139, 249, 0.7);
+}
+
+/* Metric styling */
+.metrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background-color: rgba(0, 31, 84, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    min-width: 120px;
+    border-left: 3px solid #4F8BF9;
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.5rem;
     font-weight: 600;
-    padding: 0.75rem 1rem !important;
+    color: white;
 }
 
-.dataframe td {
-    padding: 0.625rem 1rem !important;
-    border-bottom: 1px solid #edf2f7;
+.metric-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
 }
 
-/* Metrics styling */
-.stMetric {
-    background-color: #f8fafc;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+/* Buttons and interactive elements */
+div.stButton > button.primary-button {
+    background-color: #4F8BF9;
+    color: white;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: none;
+    transition: all 0.3s ease;
 }
 
-/* Chat elements styling */
-.stChatMessage {
-    border-radius: 1rem;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.75rem;
+div.stButton > button.primary-button:hover {
+    background-color: #1C63D4;
+    box-shadow: 0 4px 12px rgba(79, 139, 249, 0.4);
+}
+
+/* Data table styling for modern look */
+div[data-testid="stTable"] {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+div[data-testid="stTable"] table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+div[data-testid="stTable"] th {
+    background-color: rgba(79, 139, 249, 0.2);
+    border-top: none;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+}
+
+div[data-testid="stTable"] td {
+    padding: 12px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tooltips and help text */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(10, 17, 40, 0.95);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(79, 139, 249, 0.2);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Page header styling */
+.page-header {
+    background: linear-gradient(90deg, rgba(79, 139, 249, 0.8) 0%, rgba(28, 99, 212, 0.8) 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-header h1 {
+    color: white;
+    margin: 0;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-header-description {
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 8px;
+    max-width: 600px;
+    font-size: 1.1rem;
     line-height: 1.5;
 }
 
-.stChatInput > div {
-    border-radius: 1.5rem;
+/* App footer */
+.app-footer {
+    margin-top: 60px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(10, 17, 40, 0.7) 0%, rgba(0, 31, 84, 0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(79, 139, 249, 0.2);
 }
 
-/* Navigation selection styling */
-.stSelectbox label, .stMultiselect label {
-    font-size: 0.875rem;
+.app-footer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.app-footer-logo span {
+    font-weight: 600;
+    color: #4F8BF9;
+    font-size: 1.2rem;
+}
+
+.app-footer-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.app-footer-link {
+    color: #4F8BF9;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.app-footer-link:hover {
+    color: #1C63D4;
+    text-decoration: underline;
+}
+
+/* Dashboard feature cards */
+.feature-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.feature-card {
+    background-color: rgba(0, 31, 84, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(79, 139, 249, 0.1);
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #4F8BF9;
+}
+
+.feature-card-title {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.feature-card-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Chart containers */
+.chart-container {
+    background-color: rgba(0, 31, 84, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(79, 139, 249, 0.1);
+}
+
+.chart-title {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chart-title-icon {
+    color: #4F8BF9;
+}
+
+/* AI Assistant styling */
+.ai-message-container {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: rgba(79, 139, 249, 0.1);
+    margin-bottom: 15px;
+    border-left: 3px solid #4F8BF9;
+}
+
+.ai-message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.ai-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #4F8BF9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.ai-message-content {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Form inputs styling */
+input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(79, 139, 249, 0.2) !important;
+    border-radius: 8px !important;
+    color: white !important;
+    padding: 10px 12px !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #4F8BF9 !important;
+    box-shadow: 0 0 0 2px rgba(79, 139, 249, 0.2) !important;
+}
+
+/* Pill tags and badges */
+.pill-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: #4a5568;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    background-color: rgba(79, 139, 249, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(79, 139, 249, 0.3);
 }
 
-/* Info and success messages */
-.stAlert {
-    border-radius: 0.5rem;
+/* Loading animations */
+.loading-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
 }
 
-/* Tab navigation styling */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 0.5rem;
+.loading-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4F8BF9;
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
-.stTabs [data-baseweb="tab"] {
-    border-radius: 0.5rem;
-    padding: 0.625rem 1rem;
-    font-weight: 500;
+.loading-dot:nth-child(2) {
+    animation-delay: 0.3s;
 }
 
-/* Plot styling */
-.js-plotly-plot, .plotly, .plot-container {
-    border-radius: 0.5rem;
+.loading-dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Progress bars */
+.progress-container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 15px 0;
     overflow: hidden;
 }
 
-/* Sidebar styling */
-.css-1d391kg, .css-12oz5g7 {
-    padding: 2rem 1rem;
+.progress-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #4F8BF9 0%, #1C63D4 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
 }
 
-/* Section dividers */
-hr {
-    margin: 2rem 0;
-    border-color: rgba(0, 0, 0, 0.05);
+/* Warning messages */
+.warning-message {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* Loader styling */
-.stProgress .st-dk {
-    background-color: #3b82f6;
+.warning-icon {
+    color: #ffc107;
+    font-size: 1.5rem;
 }
 
-/* Improve spacing on mobile */
-@media (max-width: 640px) {
-    .main .block-container {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
+.warning-content {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+/* Success messages */
+.success-message {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.success-icon {
+    color: #28a745;
+    font-size: 1.5rem;
+}
+
+.success-content {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+/* Error messages */
+.error-message {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.error-icon {
+    color: #dc3545;
+    font-size: 1.5rem;
+}
+
+.error-content {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .feature-cards-container {
+        grid-template-columns: 1fr;
     }
     
-    h1 {
-        font-size: 2rem;
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .page-header-description {
+        font-size: 1rem;
     }
 }

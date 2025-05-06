@@ -1,28 +1,47 @@
 import streamlit as st
 import pandas as pd
+import base64
 from utils.data_loader import load_file, get_data_summary
+
+# Function to convert image to base64 for embedding in CSS
+def get_base64_of_file(file_path):
+    """Convert file to base64 encoded string for embedding in HTML/CSS"""
+    try:
+        with open(file_path, "rb") as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except Exception as e:
+        st.error(f"Error loading file {file_path}: {e}")
+        return ""
 
 def render_sidebar():
     """
     Render the sidebar with file upload and navigation controls
     """
     with st.sidebar:
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            st.image("assets/app_logo.svg", width=60)
-        with col2:
-            st.markdown("<h2 style='margin-bottom:0; padding-bottom:0'>DataViz</h2>", unsafe_allow_html=True)
-            st.markdown("<p style='margin-top:0; padding-top:0; color:#4F8BF9; font-size:14px'>ANALYTICS DASHBOARD</p>", unsafe_allow_html=True)
+        # Logo and branding with modern design
+        st.markdown("""
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+            <img src="data:image/svg+xml;base64,{}" width="50" height="50">
+            <div>
+                <h2 style="margin: 0; padding: 0; font-size: 1.5rem; font-weight: 600; color: #4F8BF9;">DataViz</h2>
+                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.1em;">ANALYTICS PLATFORM</p>
+            </div>
+        </div>
+        <hr style="margin: 0 0 20px 0; padding: 0; border-color: rgba(255, 255, 255, 0.1);">
+        """.format(get_base64_of_file("assets/modern_logo.svg")), unsafe_allow_html=True)
         
-        st.markdown("---")
+        # Modern File Upload Section
+        st.markdown("""
+        <div style="margin-bottom: 20px;">
+            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.6); margin-bottom: 12px;">
+                📁 DATA SOURCE
+            </h3>
+        </div>
+        """, unsafe_allow_html=True)
         
-        # Modern navigation menu with icons
-        st.markdown("<h3>📊 Navigation</h3>", unsafe_allow_html=True)
-        
-        # File upload section with a modern design
-        st.markdown("<h4 style='margin-top:20px'>📁 Data Source</h4>", unsafe_allow_html=True)
         uploaded_file = st.file_uploader(
-            "Upload CSV or Excel file",
+            "Upload your dataset",
             type=["csv", "xlsx", "xls"],
             help="Upload your data file to start analysis (max 200MB)"
         )
