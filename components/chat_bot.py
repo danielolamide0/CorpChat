@@ -158,10 +158,10 @@ def render_chat_bot():
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Display chat messages
+    # Display chat messages with white text for better visibility on dark background
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+            st.markdown(f'<div style="color: white;">{message["content"]}</div>', unsafe_allow_html=True)
     
     # Check if we have data loaded
     if st.session_state.data is None:
@@ -243,9 +243,9 @@ def render_chat_bot():
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         
-        # Display user message
+        # Display user message with white text for better visibility
         with st.chat_message("user"):
-            st.markdown(prompt)
+            st.markdown(f'<div style="color: white;">{prompt}</div>', unsafe_allow_html=True)
         
         # Display assistant response
         with st.chat_message("assistant"):
@@ -264,13 +264,13 @@ def render_chat_bot():
                     stream=True,
                 )
                 
-                # Stream the response
+                # Stream the response with white text
                 for chunk in stream:
                     if chunk.choices[0].delta.content is not None:
                         full_response += chunk.choices[0].delta.content
-                        message_placeholder.markdown(full_response + "▌")
+                        message_placeholder.markdown(f'<div style="color: white;">{full_response}▌</div>', unsafe_allow_html=True)
                 
-                message_placeholder.markdown(full_response)
+                message_placeholder.markdown(f'<div style="color: white;">{full_response}</div>', unsafe_allow_html=True)
                 
                 # Try to generate visualization based on:
                 # 1. Direct visualization request from user
@@ -351,26 +351,28 @@ def render_placeholder_chat_bot():
     - Recommend data-driven business strategies
     """)
     
-    # Example chat interface (placeholder)
+    # Example chat interface (placeholder) with white text for better visibility
     st.subheader("Example Chat")
     with st.chat_message("user"):
-        st.markdown("What age group represents our primary customer base and can you create a visualization?")
+        st.markdown('<div style="color: white;">What age group represents our primary customer base and can you create a visualization?</div>', unsafe_allow_html=True)
     
     with st.chat_message("assistant"):
         st.markdown("""
-        **Key Customer Demographic: 25-34 age group**
+        <div style="color: white;">
+        <strong>Key Customer Demographic: 25-34 age group</strong>
         
         Primary customer base breakdown:
         • 25-34: 30% (8 customers)
         • 18-24: 22% (6 customers)
         • 35-44: 22% (6 customers)
         
-        **Recommended Action:**
+        <strong>Recommended Action:</strong>
         Focus marketing resources on the 25-34 demographic while developing retention strategies for the younger segment.
         
-        **Visualization:**
+        <strong>Visualization:</strong>
         I recommend a bar chart showing customer count by age group. This will help visualize the distribution of your customer base across different demographics.
-        """)
+        </div>
+        """, unsafe_allow_html=True)
         
     # Show example visualization below the chat
     st.write("**Generated Visualization:**")
