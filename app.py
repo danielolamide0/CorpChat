@@ -3,6 +3,29 @@ import pandas as pd
 import os
 import base64
 from streamlit.components.v1 import html
+
+# Function to convert image to base64 for embedding in CSS
+def get_base64_of_file(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+# Function to set background image
+def set_background(background_image_path):
+    background_base64 = get_base64_of_file(background_image_path)
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/svg+xml;base64,{background_base64}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 from components.sidebar import render_sidebar
 from components.data_preview import render_data_preview
 from components.analysis_section import render_analysis_section
@@ -59,12 +82,18 @@ if 'openai_api_key_available' not in st.session_state:
     api_key = os.environ.get("OPENAI_API_KEY")
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
+# Apply the data visualization background image
+background_image_path = './assets/background.svg'
+if os.path.exists(background_image_path):
+    set_background(background_image_path)
+
 # Theme toggle
 theme = 'dark' if st.sidebar.toggle('Enable Dark Mode') else 'light'
 st.markdown(f"""
     <style>
         .stApp {{
-            background: {'#0e1117' if theme == 'dark' else '#ffffff'};
+            /* Background is already set by the SVG, but we add a subtle overlay for theme */
+            background-color: {'rgba(14, 17, 23, 0.92)' if theme == 'dark' else 'rgba(255, 255, 255, 0.92)'};
         }}
         div[class*="css"] {{
             color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
@@ -138,7 +167,7 @@ if st.session_state.current_tab == "Upload":
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("""
-            <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
+            <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
                 <h3 style="color:#4F8BF9; margin-top:0;">🔍 Powerful Data Analysis</h3>
                 <ul style="padding-left:20px;">
                     <li><strong>Process</strong> CSV and Excel files</li>
@@ -153,7 +182,7 @@ if st.session_state.current_tab == "Upload":
             
         with col2:
             st.markdown("""
-            <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
+            <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
                 <h3 style="color:#4F8BF9; margin-top:0;">📊 Interactive Visualizations</h3>
                 <ul style="padding-left:20px;">
                     <li><strong>Bar charts</strong> for categorical data</li>
@@ -168,7 +197,7 @@ if st.session_state.current_tab == "Upload":
         
         # AI Assistant card
         st.markdown("""
-        <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
+        <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
             <h3 style="color:#4F8BF9; margin-top:0;">🤖 AI-Powered Business Intelligence</h3>
             <p>Ask questions about your data using natural language and get instant insights. The AI assistant can:</p>
             <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;">
@@ -184,7 +213,7 @@ if st.session_state.current_tab == "Upload":
         
         # Upload Guidelines
         st.markdown("""
-        <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
+        <div style="background-color:rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
             <h3 style="color:#4F8BF9; margin-top:0;">📁 File Upload Guidelines</h3>
             <ul style="padding-left:20px;">
                 <li><strong>Supported formats:</strong> CSV (.csv) and Excel (.xlsx, .xls)</li>
