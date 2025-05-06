@@ -99,11 +99,17 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# Main app header
+# Main app header with a modern design
 st.markdown("""
-# 📊 Data Analysis & Visualization Dashboard
-Upload your data, analyze patterns, and create insightful visualizations all in one place.
-""")
+<div style="background-color:#4F8BF9; padding:1.5rem; border-radius:10px; margin-bottom:20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h1 style="color:white; margin:0; display:flex; align-items:center; gap:10px;">
+        <span>📊</span> Data Analysis & Visualization Dashboard
+    </h1>
+    <p style="color:white; margin-top:10px; font-size:1.1rem; opacity:0.9;">
+        Upload your data, analyze patterns, and create insightful visualizations all in one place.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # Render sidebar (file upload and navigation)
 render_sidebar()
@@ -113,54 +119,110 @@ if st.session_state.current_tab == "Upload":
     if st.session_state.data is not None:
         render_data_preview()
     else:
-        st.info("👆 Upload a CSV or Excel file using the sidebar to get started.")
+        # Modern info box
+        st.markdown("""
+        <div style="padding:15px; border-radius:10px; background-color:#f0f7ff; border-left:5px solid #4F8BF9; margin-bottom:25px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size:24px;">👆</span>
+                <span style="font-size:16px; font-weight:500;">Upload a CSV or Excel file using the sidebar to get started.</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
+        # Feature cards with modern design
+        st.markdown("""
+        <h2 style="margin-bottom:20px; font-size:24px; font-weight:600;">Welcome to Your Data Analysis Platform</h2>
+        """, unsafe_allow_html=True)
+        
+        # Modern cards layout
         col1, col2 = st.columns(2)
         with col1:
-            st.subheader("What you can do with this app:")
             st.markdown("""
-            - Upload CSV and Excel files
-            - View and filter your data
-            - Calculate basic statistics
-            - Clean and transform your data
-            - Create various visualizations
-            - Customize your charts
-            - Work with large datasets
-            """)
+            <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
+                <h3 style="color:#4F8BF9; margin-top:0;">🔍 Powerful Data Analysis</h3>
+                <ul style="padding-left:20px;">
+                    <li><strong>Process</strong> CSV and Excel files</li>
+                    <li><strong>Filter</strong> and transform your data</li>
+                    <li><strong>Calculate</strong> advanced statistics</li>
+                    <li><strong>Clean</strong> messy data automatically</li>
+                    <li><strong>Handle</strong> large datasets efficiently</li>
+                    <li><strong>Export</strong> analysis results</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
             
         with col2:
-            st.subheader("Supported visualizations:")
             st.markdown("""
-            - Bar charts
-            - Line charts
-            - Scatter plots
-            - Histograms
-            - Pie charts
-            - Heatmaps
-            - Box plots
-            - And more!
-            """)
+            <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height:100%;">
+                <h3 style="color:#4F8BF9; margin-top:0;">📊 Interactive Visualizations</h3>
+                <ul style="padding-left:20px;">
+                    <li><strong>Bar charts</strong> for categorical data</li>
+                    <li><strong>Line charts</strong> for time series</li>
+                    <li><strong>Scatter plots</strong> for correlations</li>
+                    <li><strong>Histograms</strong> for distributions</li>
+                    <li><strong>Pie charts</strong> for proportions</li>
+                    <li><strong>Heatmaps, box plots</strong> and more</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
         
-        st.markdown("---")
-        st.subheader("File upload guidelines:")
+        # AI Assistant card
         st.markdown("""
-        - Supported formats: CSV (.csv) and Excel (.xlsx, .xls)
-        - Maximum file size: 200MB
-        - First row should contain column headers
-        - For large files, consider using the sampling option
-        """)
+        <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
+            <h3 style="color:#4F8BF9; margin-top:0;">🤖 AI-Powered Business Intelligence</h3>
+            <p>Ask questions about your data using natural language and get instant insights. The AI assistant can:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;">
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📝 Summarize key trends</div>
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">🔍 Identify outliers</div>
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📊 Create visualizations</div>
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">💡 Recommend actions</div>
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">📈 Forecast trends</div>
+                <div style="background-color:#f0f7ff; padding:8px 15px; border-radius:20px; display:inline-block;">🧮 Perform calculations</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Upload Guidelines
+        st.markdown("""
+        <div style="background-color:white; padding:20px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top:20px;">
+            <h3 style="color:#4F8BF9; margin-top:0;">📁 File Upload Guidelines</h3>
+            <ul style="padding-left:20px;">
+                <li><strong>Supported formats:</strong> CSV (.csv) and Excel (.xlsx, .xls)</li>
+                <li><strong>Maximum file size:</strong> 200MB</li>
+                <li><strong>Structure:</strong> First row should contain column headers</li>
+                <li><strong>Large files:</strong> Use the sampling option for better performance</li>
+                <li><strong>Data types:</strong> Automatically detected for proper analysis</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif st.session_state.current_tab == "Analysis":
     if st.session_state.data is not None:
         render_analysis_section()
     else:
-        st.warning("Please upload a file first to perform analysis.")
+        # Modern styled warning
+        st.markdown("""
+        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:500;">Please upload a data file first to perform analysis.</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
 elif st.session_state.current_tab == "Visualization":
     if st.session_state.data is not None:
         render_visualization_section()
     else:
-        st.warning("Please upload a file first to create visualizations.")
+        # Modern styled warning
+        st.markdown("""
+        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:500;">Please upload a data file first to create visualizations.</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
 elif st.session_state.current_tab == "Chat Bot":
     if st.session_state.data is not None:
@@ -170,8 +232,25 @@ elif st.session_state.current_tab == "Chat Bot":
         else:
             render_placeholder_chat_bot()
     else:
-        st.warning("Please upload a file first to use the chat assistant.")
+        # Modern styled warning
+        st.markdown("""
+        <div style="padding:20px; border-radius:10px; background-color:#fff8e6; border-left:5px solid #ffb700; margin:20px 0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:500;">Please upload a data file first to use the AI assistant.</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-# Footer
-st.markdown("---")
-st.markdown("📊 Data Analysis & Visualization Dashboard | Built with Streamlit")
+# Modern footer with subtle gradient
+st.markdown("""
+<div style="margin-top: 50px; padding: 20px; border-radius: 10px; background: linear-gradient(90deg, #f0f7ff 0%, #ffffff 100%); text-align: center;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <span style="font-size: 22px;">📊</span>
+        <span style="font-weight: 600; color: #4F8BF9;">DataViz Analytics Dashboard</span>
+    </div>
+    <p style="margin: 0; font-size: 14px; color: #718096;">
+        Built with Streamlit • Modern Data Analysis • <a href="#" style="color: #4F8BF9; text-decoration: none;">Documentation</a>
+    </p>
+</div>
+""", unsafe_allow_html=True)
