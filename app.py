@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import base64
 from streamlit.components.v1 import html
 from components.sidebar import render_sidebar
 from components.data_preview import render_data_preview
@@ -16,6 +17,17 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Load custom CSS
+def load_css(css_file):
+    with open(css_file, "r") as f:
+        css = f"<style>{f.read()}</style>"
+        st.markdown(css, unsafe_allow_html=True)
+
+# Load the custom CSS if it exists
+css_path = ".streamlit/styles.css"
+if os.path.exists(css_path):
+    load_css(css_path)
 
 # Initialize session state for storing data and app state
 if 'data' not in st.session_state:

@@ -1,0 +1,151 @@
+/* Modern dashboard styling */
+
+/* Main page container */
+.main .block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Cards for content sections */
+.stCard {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Button styling */
+.stButton > button {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dataframe/table styling */
+.dataframe {
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.dataframe th {
+    background-color: #f4f7fa !important;
+    color: #4a5568 !important;
+    font-weight: 600;
+    padding: 0.75rem 1rem !important;
+}
+
+.dataframe td {
+    padding: 0.625rem 1rem !important;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Metrics styling */
+.stMetric {
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Chat elements styling */
+.stChatMessage {
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.stChatInput > div {
+    border-radius: 1.5rem;
+}
+
+/* Navigation selection styling */
+.stSelectbox label, .stMultiselect label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* Info and success messages */
+.stAlert {
+    border-radius: 0.5rem;
+}
+
+/* Tab navigation styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.5rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-weight: 500;
+}
+
+/* Plot styling */
+.js-plotly-plot, .plotly, .plot-container {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Sidebar styling */
+.css-1d391kg, .css-12oz5g7 {
+    padding: 2rem 1rem;
+}
+
+/* Section dividers */
+hr {
+    margin: 2rem 0;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Loader styling */
+.stProgress .st-dk {
+    background-color: #3b82f6;
+}
+
+/* Improve spacing on mobile */
+@media (max-width: 640px) {
+    .main .block-container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
