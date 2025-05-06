@@ -152,7 +152,7 @@ def render_chat_bot():
     """
     Render the chat bot interface for data analysis assistance
     """
-    st.header("📊 Business Intelligence Assistant")
+    st.markdown('<h1 style="color: white;">📊 Business Intelligence Assistant</h1>', unsafe_allow_html=True)
     
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -321,7 +321,7 @@ def render_placeholder_chat_bot():
     """
     Render a placeholder for the chat bot before API keys are set up
     """
-    st.header("📊 Business Intelligence Assistant")
+    st.markdown('<h1 style="color: white;">📊 Business Intelligence Assistant</h1>', unsafe_allow_html=True)
     st.info("This AI-powered assistant provides concise business insights and actionable recommendations from your data.")
     
     # Check if we have data loaded
@@ -332,7 +332,7 @@ def render_placeholder_chat_bot():
     # Display information about the dataset
     try:
         df = st.session_state.data
-        st.subheader("Current Dataset")
+        st.markdown('<h3 style="color: white;">Current Dataset</h3>', unsafe_allow_html=True)
         st.write(f"Using dataset: {st.session_state.file_name}")
         st.write(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")
         
@@ -352,7 +352,7 @@ def render_placeholder_chat_bot():
     """)
     
     # Example chat interface (placeholder) with white text for better visibility
-    st.subheader("Example Chat")
+    st.markdown('<h3 style="color: white;">Example Chat</h3>', unsafe_allow_html=True)
     with st.chat_message("user"):
         st.markdown('<div style="color: white;">What age group represents our primary customer base and can you create a visualization?</div>', unsafe_allow_html=True)
     
@@ -379,7 +379,7 @@ def render_placeholder_chat_bot():
     st.info("Visualizations will appear here when you ask for them in the chat.")
     
     # API Key Setup
-    st.subheader("API Setup")
+    st.markdown('<h3 style="color: white;">API Setup</h3>', unsafe_allow_html=True)
     st.warning("To enable this feature, you'll need to provide an OpenAI API key.")
     
     api_key = st.text_input("OpenAI API Key", type="password", help="Enter your OpenAI API key to enable the chat assistant")
