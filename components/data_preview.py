@@ -11,6 +11,50 @@ def render_data_preview():
         st.warning("No data loaded yet. Please upload a file.")
         return
     
+    # Check if we should show the save file dialog
+    if st.session_state.get("show_save_dialog", False):
+        # Create a modal-like popup asking user to save the file
+        save_container = st.container()
+        with save_container:
+            st.markdown("""
+            <div style="padding: 15px; background-color: rgba(28, 131, 225, 0.1); border: 1px solid rgba(28, 131, 225, 0.3); 
+                border-radius: 10px; margin-bottom: 20px;">
+                <h3 style="color: white; margin-top: 0;">Would you like to save this file for future use?</h3>
+                <p style="color: white;">Saving will allow you to quickly reload this dataset without re-uploading.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Yes, Save File", key="save_file_yes", use_container_width=True):
+                    # Check if file is already saved
+                    already_saved = False
+                    for saved_file in st.session_state.saved_files:
+                        if saved_file["name"] == st.session_state.file_name:
+                            already_saved = True
+                            break
+                    
+                    if not already_saved:
+                        # Add current file to saved files
+                        st.session_state.saved_files.append({
+                            "name": st.session_state.file_name,
+                            "data": st.session_state.data.copy(),
+                            "timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+                        })
+                        st.success(f"File '{st.session_state.file_name}' saved successfully!")
+                    else:
+                        st.info(f"File '{st.session_state.file_name}' is already saved.")
+                    
+                    # Reset the dialog flag
+                    st.session_state.show_save_dialog = False
+                    st.rerun()
+            
+            with col2:
+                if st.button("No, Skip", key="save_file_no", use_container_width=True):
+                    # Reset the dialog flag
+                    st.session_state.show_save_dialog = False
+                    st.rerun()
+    
     # Display data preview info
     st.markdown(f'<h1 style="color: white;">Data Preview: {st.session_state.file_name}</h1>', unsafe_allow_html=True)
     

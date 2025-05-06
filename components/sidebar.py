@@ -43,6 +43,10 @@ def render_sidebar():
         # Initialize saved files in session state if not already there
         if "saved_files" not in st.session_state:
             st.session_state.saved_files = []
+        
+        # Initialize the flag for the save file dialog
+        if "show_save_dialog" not in st.session_state:
+            st.session_state.show_save_dialog = False
             
         # File upload section
         uploaded_file = st.file_uploader(
@@ -51,43 +55,57 @@ def render_sidebar():
             help="Upload your data file to start analysis (max 200MB)"
         )
         
-        # Saved Files button with dropdown
+        # Saved Files dropdown - modernized with delete option
         st.markdown("""
         <div style="margin-top: 10px; margin-bottom: 10px;">
-            <h4 style="font-size: 0.9rem; color: white;">Saved Files</h4>
+            <h4 style="font-size: 0.9rem; color: white;">📁 Saved Files</h4>
         </div>
         """, unsafe_allow_html=True)
         
         # Display saved files if any exist
         if len(st.session_state.saved_files) > 0:
+            # Create columns for the dropdown and delete button
+            file_names = [file["name"] for file in st.session_state.saved_files]
             selected_file = st.selectbox(
                 "Select a saved file",
-                options=[file["name"] for file in st.session_state.saved_files],
+                options=file_names,
                 key="saved_file_selector"
             )
             
-            # Button to load selected saved file
-            if st.button("Load Selected File"):
-                # Find the selected file in the saved files
-                for saved_file in st.session_state.saved_files:
-                    if saved_file["name"] == selected_file:
-                        # Load the data
-                        with st.spinner("Loading saved file..."):
-                            df = saved_file["data"]
-                            
-                            # Store in session state
-                            st.session_state.data = df
-                            st.session_state.file_name = saved_file["name"]
-                            
-                            # Show success message with data summary
-                            summary = get_data_summary(df)
-                            st.success(f"Saved file loaded successfully: {summary['rows']} rows, {summary['columns']} columns")
-                            
-                            # Automatically switch to data view
-                            st.session_state.current_tab = "Upload"
+            # Display load and delete buttons side by side
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                if st.button("Load File", key="load_saved_file", use_container_width=True):
+                    # Find the selected file in the saved files
+                    for saved_file in st.session_state.saved_files:
+                        if saved_file["name"] == selected_file:
+                            # Load the data
+                            with st.spinner("Loading saved file..."):
+                                df = saved_file["data"]
+                                
+                                # Store in session state
+                                st.session_state.data = df
+                                st.session_state.file_name = saved_file["name"]
+                                
+                                # Show success message with data summary
+                                summary = get_data_summary(df)
+                                st.success(f"Loaded: {summary['rows']} rows, {summary['columns']} columns")
+                                
+                                # Automatically switch to data view
+                                st.session_state.current_tab = "Upload"
+                                st.rerun()
+            
+            with col2:
+                if st.button("🗑️", key="delete_saved_file", use_container_width=True):
+                    # Find and remove the selected file
+                    for i, saved_file in enumerate(st.session_state.saved_files):
+                        if saved_file["name"] == selected_file:
+                            del st.session_state.saved_files[i]
+                            st.success(f"Deleted: {selected_file}")
                             st.rerun()
+                            break
         else:
-            st.markdown('<p style="color: #aaa; font-size: 0.9rem;">No saved files yet. Upload and save a file first.</p>', unsafe_allow_html=True)
+            st.markdown('<p style="color: #aaa; font-size: 0.9rem;">No saved files yet. Upload a file to begin.</p>', unsafe_allow_html=True)
         
         # Sampling option for large files
         sample_size = None
@@ -103,9 +121,9 @@ def render_sidebar():
                     step=100
                 )
         
-        # Load data button
+        # Load data button - includes automatic save dialog
         if uploaded_file is not None:
-            if st.button("Load Data"):
+            if st.button("Load Data", key="load_uploaded_file"):
                 with st.spinner("Loading data..."):
                     # Load the data
                     df = load_file(uploaded_file, sample_size)
@@ -118,6 +136,9 @@ def render_sidebar():
                         # Show success message with data summary
                         summary = get_data_summary(df)
                         st.success(f"Data loaded successfully: {summary['rows']} rows, {summary['columns']} columns")
+                        
+                        # Set flag to show save dialog
+                        st.session_state.show_save_dialog = True
                         
                         # Automatically switch to data view
                         st.session_state.current_tab = "Upload"
@@ -221,22 +242,7 @@ def render_sidebar():
             st.markdown(f'<div style="color: white;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
             st.markdown(f'<div style="color: white;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
             
-            # Add Save Current File button
-            if st.button("Save Current File"):
-                # Check if file is already saved
-                already_saved = False
-                for saved_file in st.session_state.saved_files:
-                    if saved_file["name"] == st.session_state.file_name:
-                        already_saved = True
-                        break
-                
-                if not already_saved:
-                    # Add current file to saved files
-                    st.session_state.saved_files.append({
-                        "name": st.session_state.file_name,
-                        "data": st.session_state.data.copy(),
-                        "timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
-                    })
-                    st.success(f"File '{st.session_state.file_name}' saved successfully!")
-                else:
-                    st.info(f"File '{st.session_state.file_name}' is already saved.")
+            # Add option to show save dialog again
+            if st.button("Save to Library"):
+                st.session_state.show_save_dialog = True
+                st.rerun()
