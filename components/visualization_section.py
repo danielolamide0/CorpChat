@@ -21,7 +21,7 @@ def render_visualization_section():
         st.warning("No data loaded yet. Please upload a file.")
         return
     
-    st.header("Data Visualization")
+    st.markdown('<h1 style="color: white;">Data Visualization</h1>', unsafe_allow_html=True)
     
     # Get column types for better column selection suggestions
     column_types = get_column_types(st.session_state.data)
@@ -46,7 +46,7 @@ def render_visualization_section():
     )
     
     # Create visualization based on type
-    with st.expander("Visualization Configuration", expanded=True):
+    with st.expander('<span style="color: white;">Visualization Configuration</span>', expanded=True):
         if viz_type == "Bar Chart":
             render_bar_chart_config(column_types)
         elif viz_type == "Line Chart":
@@ -66,7 +66,7 @@ def render_visualization_section():
     
     # Display saved visualizations
     if st.session_state.visualizations:
-        st.subheader("Your Visualizations")
+        st.markdown('<h3 style="color: white;">Your Visualizations</h3>', unsafe_allow_html=True)
         
         for i, viz in enumerate(st.session_state.visualizations):
             with st.expander(f"Visualization {i+1}: {viz['title']}", expanded=i == 0):
@@ -86,7 +86,7 @@ def render_bar_chart_config(column_types):
     Parameters:
     - column_types: Dictionary mapping column names to their types
     """
-    st.subheader("Bar Chart Configuration")
+    st.markdown('<h3 style="color: white;">Bar Chart Configuration</h3>', unsafe_allow_html=True)
     
     # Get categorical columns for x-axis suggestions
     categorical_columns = [col for col, type_ in column_types.items() 
@@ -166,7 +166,7 @@ def render_line_chart_config(column_types):
     Parameters:
     - column_types: Dictionary mapping column names to their types
     """
-    st.subheader("Line Chart Configuration")
+    st.markdown('<h3 style="color: white;">Line Chart Configuration</h3>', unsafe_allow_html=True)
     
     # Suggest datetime or numeric columns for x-axis
     x_axis_suggestions = [col for col, type_ in column_types.items() 

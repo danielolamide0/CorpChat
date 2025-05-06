@@ -12,7 +12,7 @@ def render_data_preview():
         return
     
     # Display data preview info
-    st.header(f"Data Preview: {st.session_state.file_name}")
+    st.markdown(f'<h1 style="color: white;">Data Preview: {st.session_state.file_name}</h1>', unsafe_allow_html=True)
     
     # Data summary
     summary = get_data_summary(st.session_state.data)
@@ -28,7 +28,7 @@ def render_data_preview():
         st.metric("Missing Values", summary['missing_values'])
     
     # Display data table with options
-    st.subheader("Data Table")
+    st.markdown('<h3 style="color: white;">Data Table</h3>', unsafe_allow_html=True)
     
     # Search and filter options
     search_term = st.text_input("Search in data", placeholder="Enter text to search across all columns")
@@ -74,7 +74,7 @@ def render_data_preview():
                 st.info(f"Showing {min(num_rows, total_rows)} of {total_rows} total rows")
     
     # Column information
-    st.subheader("Column Information")
+    st.markdown('<h3 style="color: white;">Column Information</h3>', unsafe_allow_html=True)
     
     # Prepare column info as a dataframe
     column_info = []
