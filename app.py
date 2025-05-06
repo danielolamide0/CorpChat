@@ -281,29 +281,6 @@ if st.session_state.current_tab == "Upload":
         </div>
         """, unsafe_allow_html=True)
         
-        # Supported file formats section
-        st.markdown("""
-        <div class="chart-container" style="margin-top:30px;">
-            <div class="chart-title">
-                <span class="chart-title-icon">📁</span> Supported File Formats
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
-                <div class="pill-tag" style="font-size:0.9rem;">CSV (.csv)</div>
-                <div class="pill-tag" style="font-size:0.9rem;">Excel (.xlsx)</div>
-                <div class="pill-tag" style="font-size:0.9rem;">Excel 97-2003 (.xls)</div>
-            </div>
-            <div style="margin-top:20px; color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.5;">
-                <p><strong>Guidelines:</strong></p>
-                <ul style="margin-top:5px; padding-left:20px;">
-                    <li>Files should have column headers in the first row</li>
-                    <li>Maximum file size: 200MB</li>
-                    <li>For large files, we recommend using the sampling option</li>
-                    <li>Data types are automatically detected for analysis</li>
-                </ul>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
         # AI capabilities highlight
         st.markdown("""
         <div class="chart-container" style="margin-top:30px; background-color:rgba(79, 139, 249, 0.1); border:1px solid rgba(79, 139, 249, 0.2);">
@@ -336,6 +313,29 @@ if st.session_state.current_tab == "Upload":
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Supported file formats section
+        st.markdown("""
+        <div class="chart-container" style="margin-top:30px;">
+            <div class="chart-title">
+                <span class="chart-title-icon">📁</span> Supported File Formats
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
+                <div class="pill-tag" style="font-size:0.9rem;">CSV (.csv)</div>
+                <div class="pill-tag" style="font-size:0.9rem;">Excel (.xlsx)</div>
+                <div class="pill-tag" style="font-size:0.9rem;">Excel 97-2003 (.xls)</div>
+            </div>
+            <div style="margin-top:20px; color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.5;">
+                <p><strong>Guidelines:</strong></p>
+                <ul style="margin-top:5px; padding-left:20px;">
+                    <li>Files should have column headers in the first row</li>
+                    <li>Maximum file size: 200MB</li>
+                    <li>For large files, we recommend using the sampling option</li>
+                    <li>Data types are automatically detected for analysis</li>
+                </ul>
             </div>
         </div>
         """, unsafe_allow_html=True)
