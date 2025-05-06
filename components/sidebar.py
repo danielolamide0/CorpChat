@@ -25,7 +25,7 @@ def render_sidebar():
             <img src="data:image/svg+xml;base64,{}" width="50" height="50">
             <div>
                 <h2 style="margin: 0; padding: 0; font-size: 1.5rem; font-weight: 600; color: #4F8BF9;">DataViz</h2>
-                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.1em;">ANALYTICS PLATFORM</p>
+                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: white; letter-spacing: 0.1em;">ANALYTICS PLATFORM</p>
             </div>
         </div>
         <hr style="margin: 0 0 20px 0; padding: 0; border-color: rgba(255, 255, 255, 0.1);">
@@ -34,17 +34,60 @@ def render_sidebar():
         # Modern File Upload Section
         st.markdown("""
         <div style="margin-bottom: 20px;">
-            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.6); margin-bottom: 12px;">
+            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: white; margin-bottom: 12px;">
                 📁 DATA SOURCE
             </h3>
         </div>
         """, unsafe_allow_html=True)
         
+        # Initialize saved files in session state if not already there
+        if "saved_files" not in st.session_state:
+            st.session_state.saved_files = []
+            
+        # File upload section
         uploaded_file = st.file_uploader(
             "Upload your dataset",
             type=["csv", "xlsx", "xls"],
             help="Upload your data file to start analysis (max 200MB)"
         )
+        
+        # Saved Files button with dropdown
+        st.markdown("""
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+            <h4 style="font-size: 0.9rem; color: white;">Saved Files</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Display saved files if any exist
+        if len(st.session_state.saved_files) > 0:
+            selected_file = st.selectbox(
+                "Select a saved file",
+                options=[file["name"] for file in st.session_state.saved_files],
+                key="saved_file_selector"
+            )
+            
+            # Button to load selected saved file
+            if st.button("Load Selected File"):
+                # Find the selected file in the saved files
+                for saved_file in st.session_state.saved_files:
+                    if saved_file["name"] == selected_file:
+                        # Load the data
+                        with st.spinner("Loading saved file..."):
+                            df = saved_file["data"]
+                            
+                            # Store in session state
+                            st.session_state.data = df
+                            st.session_state.file_name = saved_file["name"]
+                            
+                            # Show success message with data summary
+                            summary = get_data_summary(df)
+                            st.success(f"Saved file loaded successfully: {summary['rows']} rows, {summary['columns']} columns")
+                            
+                            # Automatically switch to data view
+                            st.session_state.current_tab = "Upload"
+                            st.rerun()
+        else:
+            st.markdown('<p style="color: #aaa; font-size: 0.9rem;">No saved files yet. Upload and save a file first.</p>', unsafe_allow_html=True)
         
         # Sampling option for large files
         sample_size = None
@@ -173,7 +216,27 @@ def render_sidebar():
             summary = get_data_summary(st.session_state.data)
             
             # Display data stats
-            st.markdown(f"**Rows:** {summary['rows']}")
-            st.markdown(f"**Columns:** {summary['columns']}")
-            st.markdown(f"**Missing Values:** {summary['missing_values']}")
-            st.markdown(f"**Memory Usage:** {summary['memory_usage']:.2f} MB")
+            st.markdown(f'<div style="color: white;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: white;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: white;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: white;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
+            
+            # Add Save Current File button
+            if st.button("Save Current File"):
+                # Check if file is already saved
+                already_saved = False
+                for saved_file in st.session_state.saved_files:
+                    if saved_file["name"] == st.session_state.file_name:
+                        already_saved = True
+                        break
+                
+                if not already_saved:
+                    # Add current file to saved files
+                    st.session_state.saved_files.append({
+                        "name": st.session_state.file_name,
+                        "data": st.session_state.data.copy(),
+                        "timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+                    })
+                    st.success(f"File '{st.session_state.file_name}' saved successfully!")
+                else:
+                    st.info(f"File '{st.session_state.file_name}' is already saved.")
