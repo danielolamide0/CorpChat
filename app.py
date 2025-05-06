@@ -228,30 +228,53 @@ if st.session_state.current_tab == "Upload":
         </h3>
         """, unsafe_allow_html=True)
 
-        # Feature cards in a grid layout
-        st.markdown("""
+        # Enhanced feature sections with images
+        st.markdown(f"""
+        <div class="feature-showcase">
+            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:rgba(55, 65, 81, 0.3); border-radius:12px; padding:20px; gap:30px; align-items:center; border:1px solid rgba(79, 139, 249, 0.2);">
+                <div style="flex:1; min-width:180px;">
+                    <div style="font-size:24px; margin-bottom:10px; color:white;">📈 Data Analysis</div>
+                    <p style="color:rgba(255,255,255,0.9); line-height:1.6;">
+                        Transform your raw data into actionable business intelligence with our comprehensive analysis tools:
+                    </p>
+                    <ul style="color:rgba(255,255,255,0.9); padding-left:20px; margin-top:10px;">
+                        <li style="margin-bottom:5px;">Calculate detailed statistics like mean, median, standard deviation</li>
+                        <li style="margin-bottom:5px;">Identify correlations and relationships between variables</li>
+                        <li style="margin-bottom:5px;">Filter and segment data to focus on specific business questions</li>
+                        <li style="margin-bottom:5px;">Handle outliers and missing values with intelligent algorithms</li>
+                    </ul>
+                </div>
+                <div style="flex:1; min-width:180px; display:flex; justify-content:center;">
+                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_analysis.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+            
+            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:rgba(55, 65, 81, 0.3); border-radius:12px; padding:20px; gap:30px; align-items:center; border:1px solid rgba(79, 139, 249, 0.2);">
+                <div style="flex:1; min-width:180px; display:flex; justify-content:center;">
+                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_visualization.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+                <div style="flex:1; min-width:180px;">
+                    <div style="font-size:24px; margin-bottom:10px; color:white;">📊 Data Visualization</div>
+                    <p style="color:rgba(255,255,255,0.9); line-height:1.6;">
+                        Create stunning interactive visualizations that make your data come alive:
+                    </p>
+                    <ul style="color:rgba(255,255,255,0.9); padding-left:20px; margin-top:10px;">
+                        <li style="margin-bottom:5px;">Generate beautiful bar charts, line graphs, scatter plots</li>
+                        <li style="margin-bottom:5px;">Build heatmaps and correlation matrices to identify patterns</li>
+                        <li style="margin-bottom:5px;">Create pie charts and box plots for distribution analysis</li>
+                        <li style="margin-bottom:5px;">Export and share visualizations with your team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional Features in a Card Grid -->
         <div class="feature-cards-container">
-            <div class="feature-card">
-                <div class="feature-card-icon">📈</div>
-                <div class="feature-card-title">Data Analysis</div>
-                <div class="feature-card-description">
-                    Analyze trends, detect patterns, and calculate statistics with powerful analytical tools. Filter and transform your data with ease.
-                </div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card-icon">📊</div>
-                <div class="feature-card-title">Visualizations</div>
-                <div class="feature-card-description">
-                    Create stunning charts, graphs, and plots with our interactive visualization tools. Choose from bar charts, line charts, scatter plots, and more.
-                </div>
-            </div>
-            
             <div class="feature-card">
                 <div class="feature-card-icon">🧹</div>
                 <div class="feature-card-title">Data Cleaning</div>
                 <div class="feature-card-description">
-                    Clean and preprocess your data with automated tools for handling missing values, outliers, and inconsistencies.
+                    Clean and preprocess your data with automated tools for handling missing values, outliers, and inconsistencies. Prepare your data for analysis in just a few clicks.
                 </div>
             </div>
             
@@ -259,7 +282,7 @@ if st.session_state.current_tab == "Upload":
                 <div class="feature-card-icon">🤖</div>
                 <div class="feature-card-title">AI Assistant</div>
                 <div class="feature-card-description">
-                    Ask questions in natural language to get insights, summaries, and visualizations automatically generated by our AI.
+                    Ask questions in natural language to get insights, summaries, and visualizations automatically generated by our AI. No complex query language needed.
                 </div>
             </div>
             
@@ -267,7 +290,7 @@ if st.session_state.current_tab == "Upload":
                 <div class="feature-card-icon">📱</div>
                 <div class="feature-card-title">Responsive Design</div>
                 <div class="feature-card-description">
-                    Access your analytics from any device with our fully responsive dashboard that adapts to your screen size.
+                    Access your analytics from any device with our fully responsive dashboard that adapts to your screen size. Work seamlessly from desktop or mobile.
                 </div>
             </div>
             
@@ -275,42 +298,49 @@ if st.session_state.current_tab == "Upload":
                 <div class="feature-card-icon">🔄</div>
                 <div class="feature-card-title">Real-time Processing</div>
                 <div class="feature-card-description">
-                    Process and visualize your data in real-time with immediate feedback and interactive elements.
+                    Process and visualize your data in real-time with immediate feedback and interactive elements. See results instantly as you work.
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # AI capabilities highlight
+        # AI capabilities highlight - simplified and modern
         st.markdown("""
-        <div class="chart-container" style="margin-top:30px; background-color:rgba(79, 139, 249, 0.1); border:1px solid rgba(79, 139, 249, 0.2);">
+        <div class="chart-container" style="margin-top:30px; background-color:rgba(79, 139, 249, 0.1); border:1px solid rgba(79, 139, 249, 0.2); position:relative; overflow:hidden;">
+            <div style="position:absolute; right:-30px; top:-30px; width:200px; height:200px; background:radial-gradient(circle, rgba(79, 139, 249, 0.3) 0%, rgba(79, 139, 249, 0) 70%); border-radius:50%;"></div>
+            
             <div class="chart-title">
                 <span class="chart-title-icon">🤖</span> AI-Powered Analytics
             </div>
-            <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-top:15px;">
-                <div style="flex:1; min-width:200px;">
-                    <p style="color:rgba(255,255,255,0.8); font-size:0.95rem; line-height:1.6; margin-bottom:15px;">
-                        Our AI assistant can analyze your data and answer questions in natural language. Simply describe what you're looking for:
-                    </p>
-                    <div class="ai-message-container">
-                        <div class="ai-message-header">
-                            <div class="ai-avatar">AI</div>
-                            <strong style="color:white;">Sample AI Response</strong>
-                        </div>
-                        <div class="ai-message-content">
-                            "Based on your sales data, I've identified that the highest performing product category is 'Electronics' with 32% growth YoY. Here's a visualization of the trend."
-                        </div>
+            
+            <div style="padding:15px 20px;">
+                <p style="color:white; font-size:1rem; line-height:1.6; margin-bottom:20px;">
+                    Our AI assistant transforms how you interact with your data. Just ask questions in plain English and get instant insights.
+                </p>
+                
+                <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:20px;">
+                    <div style="flex:1; min-width:250px; background:rgba(0, 31, 84, 0.3); padding:20px; border-radius:10px; border:1px solid rgba(79, 139, 249, 0.3);">
+                        <h4 style="color:white; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:20px;">💬</span> Ask Questions Like
+                        </h4>
+                        <ul style="color:white; padding-left:20px; margin:0;">
+                            <li style="margin-bottom:8px;">"What are the top-selling products?"</li>
+                            <li style="margin-bottom:8px;">"Show monthly revenue trends"</li>
+                            <li style="margin-bottom:8px;">"Find correlations between customer age and spending"</li>
+                            <li style="margin-bottom:8px;">"Create a visualization of regional performance"</li>
+                        </ul>
                     </div>
-                </div>
-                <div style="flex:1; min-width:200px;">
-                    <div style="background-color:rgba(0, 31, 84, 0.3); padding:15px; border-radius:8px; text-align:center;">
-                        <p style="color:white; font-weight:500; margin-bottom:15px;">Example Queries:</p>
-                        <div style="display:flex; flex-direction:column; gap:10px;">
-                            <div class="pill-tag">"Show me the sales trend for last quarter"</div>
-                            <div class="pill-tag">"What's the correlation between price and reviews?"</div>
-                            <div class="pill-tag">"Identify outliers in the customer data"</div>
-                            <div class="pill-tag">"Create a visualization of market segments"</div>
-                        </div>
+                    
+                    <div style="flex:1; min-width:250px; background:rgba(0, 31, 84, 0.3); padding:20px; border-radius:10px; border:1px solid rgba(79, 139, 249, 0.3);">
+                        <h4 style="color:white; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:20px;">✨</span> AI-Generated Insights
+                        </h4>
+                        <ul style="color:white; padding-left:20px; margin:0;">
+                            <li style="margin-bottom:8px;">Automatic trend detection and anomaly identification</li>
+                            <li style="margin-bottom:8px;">Smart visualization recommendations based on your data</li> 
+                            <li style="margin-bottom:8px;">Natural language explanations of complex patterns</li>
+                            <li style="margin-bottom:8px;">Instant responses to your business questions</li>
+                        </ul>
                     </div>
                 </div>
             </div>
