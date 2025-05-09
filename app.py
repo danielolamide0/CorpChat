@@ -145,6 +145,16 @@ st.markdown(f"""
             --sidebar-bg-color: {f'#242424' if theme == 'dark' else '#ffffff'};
         }}
         
+        /* Navigation bar in dark mode */
+        header[data-testid="stHeader"] {{
+            background-color: {f'#242424' if theme == 'dark' else ''} !important;
+        }}
+        
+        /* Hamburger menu button for sidebar */
+        button[kind="header"] {{
+            color: {f'white' if theme == 'dark' else ''} !important;
+        }}
+        
         .stApp {{
             /* Background is set by the SVG */
             background-color: {f'rgba(20, 20, 20, 0.3)' if theme == 'dark' else 'rgba(255, 255, 255, 0.3)'};
@@ -221,6 +231,11 @@ st.markdown(f"""
             background: {f'#333333' if theme == 'dark' else '#f5f5f5'};
             border: 2px dashed {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
             border-radius: 8px;
+        }}
+        
+        /* Fix for file dropzone text color in dark mode */
+        div[data-testid="stFileUploadDropzone"] p {{
+            color: {f'#242424' if theme == 'dark' else '#333333'} !important;
         }}
         
         /* Expanders */
