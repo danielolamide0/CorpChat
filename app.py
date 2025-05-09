@@ -310,7 +310,7 @@ if st.session_state.current_tab == "Upload":
             </div>
             
             <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
-                <div class="feature-card-icon">📱</div>
+                <div class="feature-card-icon" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Responsive</div>
                 <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Responsive Design</div>
                 <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Access your analytics from any device with our fully responsive dashboard that adapts to your screen size. Work seamlessly from desktop or mobile.
@@ -318,7 +318,7 @@ if st.session_state.current_tab == "Upload":
             </div>
             
             <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
-                <div class="feature-card-icon">🔄</div>
+                <div class="feature-card-icon" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Real-time</div>
                 <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Real-time Processing</div>
                 <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Process and visualize your data in real-time with immediate feedback and interactive elements. See results instantly as you work.
@@ -345,7 +345,7 @@ if st.session_state.current_tab == "Upload":
                 <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:20px;">
                     <div style="flex:1; min-width:250px; background:white; padding:20px; border-radius:10px; border:1px solid #E0E0E0; box-shadow:0 4px 8px rgba(0,0,0,0.08);">
                         <h4 style="color:#242424; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px; font-family:'Space Grotesk', sans-serif; font-weight:600;">
-                            <span style="font-size:20px;">💬</span> Ask Questions Like
+                            Ask Questions Like
                         </h4>
                         <ul style="color:#333; padding-left:20px; margin:0; font-family:'Space Grotesk', sans-serif;">
                             <li style="margin-bottom:8px;">"What are the top-selling products?"</li>
@@ -357,7 +357,7 @@ if st.session_state.current_tab == "Upload":
                     
                     <div style="flex:1; min-width:250px; background:white; padding:20px; border-radius:10px; border:1px solid #E0E0E0; box-shadow:0 4px 8px rgba(0,0,0,0.08);">
                         <h4 style="color:#242424; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px; font-family:'Space Grotesk', sans-serif; font-weight:600;">
-                            <span style="font-size:20px;">✨</span> AI-Generated Insights
+                            AI-Generated Insights
                         </h4>
                         <ul style="color:#333; padding-left:20px; margin:0; font-family:'Space Grotesk', sans-serif;">
                             <li style="margin-bottom:8px;">Automatic trend detection and anomaly identification</li>
@@ -376,7 +376,7 @@ if st.session_state.current_tab == "Upload":
         <div class="chart-container" style="margin-top:30px; background-color:white; border:1px solid #E0E0E0; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
             <div style="padding:25px;">
                 <div style="font-size:20px; margin-bottom:15px; color:#242424; font-family:'Space Grotesk', sans-serif; font-weight:600; display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:24px;">📁</span> Supported File Formats
+                    Supported File Formats
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
                     <div style="background-color:#F5F5F5; border:1px solid #E0E0E0; border-radius:100px; padding:8px 16px; display:inline-block; font-size:0.9rem; color:#242424; font-family:'Space Grotesk', sans-serif;">CSV (.csv)</div>
@@ -404,7 +404,7 @@ elif st.session_state.current_tab == "Analysis":
         st.markdown("""
         <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:600; color:#F9A825; font-family:'Space Grotesk', sans-serif;">Warning:</span>
                 <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to perform analysis.</span>
             </div>
         </div>
@@ -418,7 +418,7 @@ elif st.session_state.current_tab == "Visualization":
         st.markdown("""
         <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:600; color:#F9A825; font-family:'Space Grotesk', sans-serif;">Warning:</span>
                 <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to create visualizations.</span>
             </div>
         </div>
@@ -436,7 +436,7 @@ elif st.session_state.current_tab == "Chat Bot":
         st.markdown("""
         <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size:24px;">⚠️</span>
+                <span style="font-size:16px; font-weight:600; color:#F9A825; font-family:'Space Grotesk', sans-serif;">Warning:</span>
                 <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to use the AI assistant.</span>
             </div>
         </div>
