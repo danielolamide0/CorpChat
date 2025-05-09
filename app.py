@@ -223,21 +223,21 @@ if st.session_state.current_tab == "Upload":
         
         # Feature grid layout inspired by modern analytics dashboards
         st.markdown("""
-        <h3 style="margin-bottom:20px; font-size:1.3rem; font-weight:600; color:white;">
+        <h3 style="margin-bottom:20px; font-size:1.4rem; font-weight:600; color:#242424; font-family:'Space Grotesk', sans-serif;">
             Key Features & Capabilities
         </h3>
         """, unsafe_allow_html=True)
 
-        # Enhanced feature sections with images
+        # Enhanced feature sections with images - updated to black/white/gray theme
         st.markdown(f"""
         <div class="feature-showcase">
-            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:rgba(55, 65, 81, 0.3); border-radius:12px; padding:20px; gap:30px; align-items:center; border:1px solid rgba(79, 139, 249, 0.2);">
+            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:white; border-radius:12px; padding:25px; gap:30px; align-items:center; border:1px solid #E0E0E0; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
                 <div style="flex:1; min-width:180px;">
-                    <div style="font-size:24px; margin-bottom:10px; color:white;">📈 Data Analysis</div>
-                    <p style="color:rgba(255,255,255,0.9); line-height:1.6;">
+                    <div style="font-size:24px; margin-bottom:10px; color:#242424; font-family:'Space Grotesk', sans-serif; font-weight:600;">📈 Data Analysis</div>
+                    <p style="color:#333; line-height:1.6; font-family:'Space Grotesk', sans-serif;">
                         Transform your raw data into actionable business intelligence with our comprehensive analysis tools:
                     </p>
-                    <ul style="color:rgba(255,255,255,0.9); padding-left:20px; margin-top:10px;">
+                    <ul style="color:#333; padding-left:20px; margin-top:10px; font-family:'Space Grotesk', sans-serif;">
                         <li style="margin-bottom:5px;">Calculate detailed statistics like mean, median, standard deviation</li>
                         <li style="margin-bottom:5px;">Identify correlations and relationships between variables</li>
                         <li style="margin-bottom:5px;">Filter and segment data to focus on specific business questions</li>
@@ -245,20 +245,20 @@ if st.session_state.current_tab == "Upload":
                     </ul>
                 </div>
                 <div style="flex:1; min-width:180px; display:flex; justify-content:center;">
-                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_analysis.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_analysis.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
                 </div>
             </div>
             
-            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:rgba(55, 65, 81, 0.3); border-radius:12px; padding:20px; gap:30px; align-items:center; border:1px solid rgba(79, 139, 249, 0.2);">
+            <div class="feature-showcase-item" style="display:flex; margin-bottom:30px; background:white; border-radius:12px; padding:25px; gap:30px; align-items:center; border:1px solid #E0E0E0; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
                 <div style="flex:1; min-width:180px; display:flex; justify-content:center;">
-                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_visualization.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+                    <img src="data:image/svg+xml;base64,{get_base64_of_file('assets/example_images/data_visualization.svg')}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
                 </div>
                 <div style="flex:1; min-width:180px;">
-                    <div style="font-size:24px; margin-bottom:10px; color:white;">📊 Data Visualization</div>
-                    <p style="color:rgba(255,255,255,0.9); line-height:1.6;">
+                    <div style="font-size:24px; margin-bottom:10px; color:#242424; font-family:'Space Grotesk', sans-serif; font-weight:600;">📊 Data Visualization</div>
+                    <p style="color:#333; line-height:1.6; font-family:'Space Grotesk', sans-serif;">
                         Create stunning interactive visualizations that make your data come alive:
                     </p>
-                    <ul style="color:rgba(255,255,255,0.9); padding-left:20px; margin-top:10px;">
+                    <ul style="color:#333; padding-left:20px; margin-top:10px; font-family:'Space Grotesk', sans-serif;">
                         <li style="margin-bottom:5px;">Generate beautiful bar charts, line graphs, scatter plots</li>
                         <li style="margin-bottom:5px;">Build heatmaps and correlation matrices to identify patterns</li>
                         <li style="margin-bottom:5px;">Create pie charts and box plots for distribution analysis</li>
@@ -268,62 +268,63 @@ if st.session_state.current_tab == "Upload":
             </div>
         </div>
         
-        <!-- Additional Features in a Card Grid -->
+        <!-- Additional Features in a Card Grid - updated to black/white/gray theme -->
         <div class="feature-cards-container">
-            <div class="feature-card">
+            <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
                 <div class="feature-card-icon">🧹</div>
-                <div class="feature-card-title">Data Cleaning</div>
-                <div class="feature-card-description">
+                <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Data Cleaning</div>
+                <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Clean and preprocess your data with automated tools for handling missing values, outliers, and inconsistencies. Prepare your data for analysis in just a few clicks.
                 </div>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
                 <div class="feature-card-icon">🤖</div>
-                <div class="feature-card-title">AI Assistant</div>
-                <div class="feature-card-description">
+                <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">AI Assistant</div>
+                <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Ask questions in natural language to get insights, summaries, and visualizations automatically generated by our AI. No complex query language needed.
                 </div>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
                 <div class="feature-card-icon">📱</div>
-                <div class="feature-card-title">Responsive Design</div>
-                <div class="feature-card-description">
+                <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Responsive Design</div>
+                <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Access your analytics from any device with our fully responsive dashboard that adapts to your screen size. Work seamlessly from desktop or mobile.
                 </div>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card" style="background:white; border:1px solid #E0E0E0;">
                 <div class="feature-card-icon">🔄</div>
-                <div class="feature-card-title">Real-time Processing</div>
-                <div class="feature-card-description">
+                <div class="feature-card-title" style="color:#242424; font-family:'Space Grotesk', sans-serif;">Real-time Processing</div>
+                <div class="feature-card-description" style="color:#474747; font-family:'Space Grotesk', sans-serif;">
                     Process and visualize your data in real-time with immediate feedback and interactive elements. See results instantly as you work.
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # AI capabilities highlight - simplified and modern
-        st.markdown("""
-        <div class="chart-container" style="margin-top:30px; background-color:rgba(79, 139, 249, 0.1); border:1px solid rgba(79, 139, 249, 0.2); position:relative; overflow:hidden;">
-            <div style="position:absolute; right:-30px; top:-30px; width:200px; height:200px; background:radial-gradient(circle, rgba(79, 139, 249, 0.3) 0%, rgba(79, 139, 249, 0) 70%); border-radius:50%;"></div>
+        # AI capabilities highlight - updated to black theme with white content
+        st.markdown(f"""
+        <div class="chart-container" style="margin-top:30px; background-color:#242424; border:1px solid #333; position:relative; overflow:hidden; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            <div style="position:absolute; right:-30px; top:-30px; width:200px; height:200px; background:radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%); border-radius:50%;"></div>
             
-            <div class="chart-title">
-                <span class="chart-title-icon">🤖</span> AI-Powered Analytics
-            </div>
-            
-            <div style="padding:15px 20px;">
-                <p style="color:white; font-size:1rem; line-height:1.6; margin-bottom:20px;">
+            <div style="padding:25px;">
+                <div style="font-size:24px; margin-bottom:15px; color:white; font-family:'Space Grotesk', sans-serif; font-weight:600; display:flex; align-items:center; gap:10px;">
+                    <img src="data:image/jpeg;base64,{get_base64_of_file('assets/synaptide_logo.jpeg')}" style="width:32px; height:32px; border-radius:4px;">
+                    <span>Synaptide AI-Powered Analytics</span>
+                </div>
+                
+                <p style="color:white; font-size:1rem; line-height:1.6; margin-bottom:20px; font-family:'Space Grotesk', sans-serif;">
                     Our AI assistant transforms how you interact with your data. Just ask questions in plain English and get instant insights.
                 </p>
                 
                 <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:20px;">
-                    <div style="flex:1; min-width:250px; background:rgba(0, 31, 84, 0.3); padding:20px; border-radius:10px; border:1px solid rgba(79, 139, 249, 0.3);">
-                        <h4 style="color:white; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
+                    <div style="flex:1; min-width:250px; background:white; padding:20px; border-radius:10px; border:1px solid #E0E0E0; box-shadow:0 4px 8px rgba(0,0,0,0.08);">
+                        <h4 style="color:#242424; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px; font-family:'Space Grotesk', sans-serif; font-weight:600;">
                             <span style="font-size:20px;">💬</span> Ask Questions Like
                         </h4>
-                        <ul style="color:white; padding-left:20px; margin:0;">
+                        <ul style="color:#333; padding-left:20px; margin:0; font-family:'Space Grotesk', sans-serif;">
                             <li style="margin-bottom:8px;">"What are the top-selling products?"</li>
                             <li style="margin-bottom:8px;">"Show monthly revenue trends"</li>
                             <li style="margin-bottom:8px;">"Find correlations between customer age and spending"</li>
@@ -331,11 +332,11 @@ if st.session_state.current_tab == "Upload":
                         </ul>
                     </div>
                     
-                    <div style="flex:1; min-width:250px; background:rgba(0, 31, 84, 0.3); padding:20px; border-radius:10px; border:1px solid rgba(79, 139, 249, 0.3);">
-                        <h4 style="color:white; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
+                    <div style="flex:1; min-width:250px; background:white; padding:20px; border-radius:10px; border:1px solid #E0E0E0; box-shadow:0 4px 8px rgba(0,0,0,0.08);">
+                        <h4 style="color:#242424; margin-bottom:15px; font-size:1.1rem; display:flex; align-items:center; gap:8px; font-family:'Space Grotesk', sans-serif; font-weight:600;">
                             <span style="font-size:20px;">✨</span> AI-Generated Insights
                         </h4>
-                        <ul style="color:white; padding-left:20px; margin:0;">
+                        <ul style="color:#333; padding-left:20px; margin:0; font-family:'Space Grotesk', sans-serif;">
                             <li style="margin-bottom:8px;">Automatic trend detection and anomaly identification</li>
                             <li style="margin-bottom:8px;">Smart visualization recommendations based on your data</li> 
                             <li style="margin-bottom:8px;">Natural language explanations of complex patterns</li>
@@ -347,25 +348,27 @@ if st.session_state.current_tab == "Upload":
         </div>
         """, unsafe_allow_html=True)
         
-        # Supported file formats section
+        # Supported file formats section - updated to white background
         st.markdown("""
-        <div class="chart-container" style="margin-top:30px;">
-            <div class="chart-title">
-                <span class="chart-title-icon">📁</span> Supported File Formats
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
-                <div class="pill-tag" style="font-size:0.9rem;">CSV (.csv)</div>
-                <div class="pill-tag" style="font-size:0.9rem;">Excel (.xlsx)</div>
-                <div class="pill-tag" style="font-size:0.9rem;">Excel 97-2003 (.xls)</div>
-            </div>
-            <div style="margin-top:20px; color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.5;">
-                <p><strong>Guidelines:</strong></p>
-                <ul style="margin-top:5px; padding-left:20px;">
-                    <li>Files should have column headers in the first row</li>
-                    <li>Maximum file size: 200MB</li>
-                    <li>For large files, we recommend using the sampling option</li>
-                    <li>Data types are automatically detected for analysis</li>
-                </ul>
+        <div class="chart-container" style="margin-top:30px; background-color:white; border:1px solid #E0E0E0; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+            <div style="padding:25px;">
+                <div style="font-size:20px; margin-bottom:15px; color:#242424; font-family:'Space Grotesk', sans-serif; font-weight:600; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:24px;">📁</span> Supported File Formats
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
+                    <div style="background-color:#F5F5F5; border:1px solid #E0E0E0; border-radius:100px; padding:8px 16px; display:inline-block; font-size:0.9rem; color:#242424; font-family:'Space Grotesk', sans-serif;">CSV (.csv)</div>
+                    <div style="background-color:#F5F5F5; border:1px solid #E0E0E0; border-radius:100px; padding:8px 16px; display:inline-block; font-size:0.9rem; color:#242424; font-family:'Space Grotesk', sans-serif;">Excel (.xlsx)</div>
+                    <div style="background-color:#F5F5F5; border:1px solid #E0E0E0; border-radius:100px; padding:8px 16px; display:inline-block; font-size:0.9rem; color:#242424; font-family:'Space Grotesk', sans-serif;">Excel 97-2003 (.xls)</div>
+                </div>
+                <div style="margin-top:20px; color:#333; font-size:0.95rem; line-height:1.5; font-family:'Space Grotesk', sans-serif;">
+                    <p style="font-weight:600; margin-bottom:8px;">Guidelines:</p>
+                    <ul style="margin-top:5px; padding-left:20px;">
+                        <li style="margin-bottom:5px;">Files should have column headers in the first row</li>
+                        <li style="margin-bottom:5px;">Maximum file size: 200MB</li>
+                        <li style="margin-bottom:5px;">For large files, we recommend using the sampling option</li>
+                        <li style="margin-bottom:5px;">Data types are automatically detected for analysis</li>
+                    </ul>
+                </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -374,12 +377,12 @@ elif st.session_state.current_tab == "Analysis":
     if st.session_state.data is not None:
         render_analysis_section()
     else:
-        # Modern styled warning
+        # Modern styled warning with new color scheme
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
-            <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to perform analysis.</span>
+                <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to perform analysis.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -388,12 +391,12 @@ elif st.session_state.current_tab == "Visualization":
     if st.session_state.data is not None:
         render_visualization_section()
     else:
-        # Modern styled warning
+        # Modern styled warning with new color scheme
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
-            <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to create visualizations.</span>
+                <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to create visualizations.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -406,25 +409,25 @@ elif st.session_state.current_tab == "Chat Bot":
         else:
             render_placeholder_chat_bot()
     else:
-        # Modern styled warning
+        # Modern styled warning with new color scheme
         st.markdown("""
-        <div style="padding:20px; border-radius:10px; background-color:rgba(255, 248, 230, 0.2); border-left:5px solid #ffb700; margin:20px 0;">
-            <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="padding:25px; border-radius:10px; background-color:#FFF8E1; border:1px solid #FFECB3; margin:20px 0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="font-size:24px;">⚠️</span>
-                <span style="font-size:16px; font-weight:500; color:white;">Please upload a data file first to use the AI assistant.</span>
+                <span style="font-size:16px; font-weight:500; color:#333; font-family:'Space Grotesk', sans-serif;">Please upload a data file first to use the AI assistant.</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-# Modern footer with subtle gradient
-st.markdown("""
-<div style="margin-top: 50px; padding: 20px; border-radius: 10px; background: linear-gradient(90deg, rgba(23, 58, 130, 0.3) 0%, rgba(30, 30, 30, 0.5) 100%); text-align: center; border: 1px solid rgba(79, 139, 249, 0.2);">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
-        <span style="font-size: 22px;">📊</span>
-        <span style="font-weight: 600; color: white;">DataViz Analytics Dashboard</span>
+# Modern footer with new black/white theme
+st.markdown(f"""
+<div style="margin-top: 50px; padding: 25px; border-radius: 10px; background: #242424; text-align: center; border: 1px solid #333;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 15px;">
+        <img src="data:image/jpeg;base64,{get_base64_of_file('assets/synaptide_logo.jpeg')}" style="width: 32px; height: 32px; border-radius: 4px;">
+        <span style="font-weight: 600; color: white; font-family: 'Space Grotesk', sans-serif; font-size: 18px;">CorpChat Analytics</span>
     </div>
-    <p style="margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.7);">
-        Built with Streamlit • Modern Data Analysis • <a href="#" style="color: #4F8BF9; text-decoration: none;">Documentation</a>
+    <p style="margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.7); font-family: 'Space Grotesk', sans-serif;">
+        Powered by Synaptide AI • Advanced Business Intelligence • <a href="#" style="color: white; text-decoration: none; border-bottom: 1px dotted white;">Support</a>
     </p>
 </div>
 """, unsafe_allow_html=True)
