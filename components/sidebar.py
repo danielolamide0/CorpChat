@@ -58,28 +58,6 @@ def render_sidebar():
             help="Upload your data file to start analysis (max 200MB)"
         )
         
-        # Add a custom file upload container with a clear color scheme for dark mode
-        theme = 'dark' if st.session_state.get('dark_mode', False) else 'light'
-        
-        # Create a custom styled file upload label - ensure it's visible in both themes
-        st.markdown(f"""
-        <style>
-        /* Target file upload without affecting other components */
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] div,
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] p,
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] span {
-            color: {f'#ffffff !important' if theme == 'dark' else '#242424 !important'};
-            font-weight: 500;
-        }
-        
-        /* Make the background brighter in dark mode */
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] {
-            background-color: {f'#555555 !important' if theme == 'dark' else '#f5f5f5 !important'};
-            border: 2px dashed {f'#999999' if theme == 'dark' else '#e0e0e0'};
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        
         # Saved Files dropdown - modernized with delete option - theme aware
         st.markdown(f"""
         <div style="margin-top: 10px; margin-bottom: 10px;">

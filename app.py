@@ -226,11 +226,19 @@ st.markdown(f"""
             color: {f'#ffffff' if theme == 'dark' else '#333333'};
         }}
         
-        /* File upload zone - with higher contrast background in dark mode */
+        /* File upload zone */
         div[data-testid="stFileUploadDropzone"] {{
-            background: {f'#555555' if theme == 'dark' else '#f5f5f5'};
-            border: 2px dashed {f'#999999' if theme == 'dark' else '#e0e0e0'};
+            background: {f'#333333' if theme == 'dark' else '#f5f5f5'};
+            border: 2px dashed {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
             border-radius: 8px;
+        }}
+        
+        /* Fix for file dropzone text color in dark mode - stronger selector to override other styles */
+        div[data-testid="stFileUploadDropzone"] p,
+        div[data-testid="stFileUploadDropzone"] [data-testid="stMarkdownContainer"] p,
+        div[data-testid="stFileUploadDropzone"] span,
+        div[data-testid="stFileUploadDropzone"] div {{
+            color: {f'black' if theme == 'dark' else '#333333'} !important;
         }}
         
         /* Expanders */
