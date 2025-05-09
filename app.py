@@ -197,29 +197,29 @@ if st.session_state.current_tab == "Upload":
         render_data_preview()
     else:
         # Welcome banner with call to action
-        st.markdown("""
-        <div class="dashboard-card" style="background-color:rgba(23, 58, 130, 0.7); margin-bottom:30px; border:none;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+        st.markdown(f"""
+        <div class="dashboard-card" style="background-color:#242424; margin-bottom:30px; border:none; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; padding:25px;">
                 <div style="max-width:70%;">
-                    <h2 style="color:white; margin-top:0; font-size:1.6rem; font-weight:600;">
-                        Welcome to DataViz Analytics Platform
+                    <h2 style="color:white; margin-top:0; font-size:1.8rem; font-weight:600; font-family:'Space Grotesk', sans-serif;">
+                        Welcome to CorpChat Analytics
                     </h2>
-                    <p style="color:rgba(255,255,255,0.9); margin-bottom:20px; font-size:1rem; line-height:1.5;">
-                        A comprehensive solution for analyzing, visualizing, and extracting insights from your data. 
-                        Built with modern technology and designed for business professionals.
+                    <p style="color:rgba(255,255,255,0.9); margin-bottom:20px; font-size:1rem; line-height:1.5; font-family:'Space Grotesk', sans-serif;">
+                        A comprehensive solution for analyzing, visualizing, and extracting insights from your business data.
+                        Powered by Synaptide AI for intelligent analysis and insights.
                     </p>
-                    <div style="background-color:rgba(79, 139, 249, 0.3); border:1px solid rgba(79, 139, 249, 0.5); 
-                        border-radius:6px; padding:10px; margin-bottom:10px; display:inline-flex; align-items:center; gap:8px;">
+                    <div style="background-color:white; border:none; 
+                        border-radius:6px; padding:12px 16px; margin-bottom:10px; display:inline-flex; align-items:center; gap:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
                         <span style="font-size:18px;">👆</span>
-                        <span style="color:white; font-size:0.9rem;">Upload a file using the sidebar to get started</span>
+                        <span style="color:#242424; font-size:0.95rem; font-weight:500; font-family:'Space Grotesk', sans-serif;">Upload a file using the sidebar to get started</span>
                     </div>
                 </div>
                 <div style="min-width:150px; text-align:center;">
-                    <img src="data:image/svg+xml;base64,{}" width="130" height="130">
+                    <img src="data:image/jpeg;base64,{get_base64_of_file('assets/synaptide_logo.jpeg')}" style="max-width:160px; height:auto; border-radius:8px;">
                 </div>
             </div>
         </div>
-        """.format(get_base64_of_file("assets/modern_logo.svg")), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
         
         # Feature grid layout inspired by modern analytics dashboards
         st.markdown("""
