@@ -18,7 +18,7 @@ def render_analysis_section():
         st.warning("No data loaded yet. Please upload a file.")
         return
     
-    st.markdown('<h1 style="color: white;">Data Analysis</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Analysis</h1>', unsafe_allow_html=True)
     
     # Create tabs for different analysis features
     tab1, tab2, tab3, tab4 = st.tabs([
@@ -48,7 +48,7 @@ def render_basic_statistics():
     """
     Render the basic statistics analysis section
     """
-    st.markdown('<h3 style="color: white;">Basic Statistics</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Basic Statistics</h3>', unsafe_allow_html=True)
     
     # Get column types to suggest appropriate columns
     column_types = get_column_types(st.session_state.data)
@@ -86,7 +86,7 @@ def render_data_cleaning():
     """
     Render the data cleaning section
     """
-    st.markdown('<h3 style="color: white;">Data Cleaning</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Cleaning</h3>', unsafe_allow_html=True)
     
     # Data cleaning options
     st.write("Select data cleaning options:")
@@ -174,7 +174,7 @@ def render_data_filtering():
     """
     Render the data filtering section
     """
-    st.markdown('<h3 style="color: white;">Data Filtering</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Filtering</h3>', unsafe_allow_html=True)
     
     # Initialize filters in session state if not present
     if "filters" not in st.session_state:

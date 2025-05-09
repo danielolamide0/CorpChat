@@ -352,7 +352,7 @@ def render_placeholder_chat_bot():
     """)
     
     # Example chat interface (placeholder) with white text for better visibility
-    st.markdown('<h3 style="color: white;">Example Chat</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Example Chat</h3>', unsafe_allow_html=True)
     with st.chat_message("user"):
         st.markdown('<div style="color: white;">What age group represents our primary customer base and can you create a visualization?</div>', unsafe_allow_html=True)
     
@@ -379,7 +379,7 @@ def render_placeholder_chat_bot():
     st.info("Visualizations will appear here when you ask for them in the chat.")
     
     # API Key Setup
-    st.markdown('<h3 style="color: white;">API Setup</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">API Setup</h3>', unsafe_allow_html=True)
     st.warning("To enable this feature, you'll need to provide an OpenAI API key.")
     
     api_key = st.text_input("OpenAI API Key", type="password", help="Enter your OpenAI API key to enable the chat assistant")
