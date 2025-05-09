@@ -2,6 +2,19 @@
 headless = true
 address = "0.0.0.0"
 port = 5000
+enableCORS = true
+enableXsrfProtection = true
+maxUploadSize = 200
+maxMessageSize = 200
 
 [theme]
-# The theme will be controlled programmatically in app.py
+# Default light theme settings
+base = "light"
+primaryColor = "#4F8BF9"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#242424"
+font = "sans-serif"
+
+[browser]
+gatherUsageStats = false

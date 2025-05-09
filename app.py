@@ -140,6 +140,11 @@ st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
+        /* Set sidebar background color as CSS variable based on theme */
+        :root {{
+            --sidebar-bg-color: {f'#242424' if theme == 'dark' else '#ffffff'};
+        }}
+        
         .stApp {{
             /* Background is set by the SVG */
             background-color: {f'rgba(20, 20, 20, 0.3)' if theme == 'dark' else 'rgba(255, 255, 255, 0.3)'};
