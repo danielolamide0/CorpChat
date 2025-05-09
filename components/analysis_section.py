@@ -342,7 +342,7 @@ def render_distribution_analysis():
     """
     Render the distribution analysis section
     """
-    st.markdown('<h3 style="color: white;">Distribution Analysis</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Distribution Analysis</h3>', unsafe_allow_html=True)
     
     # Get column types
     column_types = get_column_types(st.session_state.data)

@@ -56,23 +56,23 @@ def render_data_preview():
                     st.rerun()
     
     # Display data preview info
-    st.markdown(f'<h1 style="color: white;">Data Preview: {st.session_state.file_name}</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h1 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Preview: {st.session_state.file_name}</h1>', unsafe_allow_html=True)
     
     # Data summary
-    summary = get_data_summary(st.session_state.data)
-    column_types = get_column_types(st.session_state.data)
+    summary = get_data_summary(st.session_state.data) or {}
+    column_types = get_column_types(st.session_state.data) or {}
     
     # Summary statistics in multiple columns
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Rows", summary['rows'])
+        st.metric("Rows", summary.get('rows', 0))
     with col2:
-        st.metric("Columns", summary['columns'])
+        st.metric("Columns", summary.get('columns', 0))
     with col3:
-        st.metric("Missing Values", summary['missing_values'])
+        st.metric("Missing Values", summary.get('missing_values', 0))
     
     # Display data table with options
-    st.markdown('<h3 style="color: white;">Data Table</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Table</h3>', unsafe_allow_html=True)
     
     # Search and filter options
     search_term = st.text_input("Search in data", placeholder="Enter text to search across all columns")
@@ -93,11 +93,11 @@ def render_data_preview():
     # Filter data based on search term
     filtered_data = st.session_state.data
     if search_term:
-        # Create a boolean mask for rows containing the search term
-        mask = pd.DataFrame(False, index=filtered_data.index, columns=['match'])
+        # Create a mask for rows containing the search term
+        matches = pd.Series(False, index=filtered_data.index)
         for col in filtered_data.columns:
-            mask['match'] |= filtered_data[col].astype(str).str.contains(search_term, case=False, na=False)
-        filtered_data = filtered_data[mask['match']]
+            matches |= filtered_data[col].astype(str).str.contains(search_term, case=False, na=False)
+        filtered_data = filtered_data[matches]
     
     # Display data table
     if not selected_columns:
@@ -112,13 +112,14 @@ def render_data_preview():
             
             # Show how many rows are being displayed
             total_rows = len(filtered_data)
-            if search_term and total_rows != summary['rows']:
+            row_count = summary.get('rows', 0)
+            if search_term and total_rows != row_count:
                 st.info(f"Showing {min(num_rows, total_rows)} of {total_rows} rows matching '{search_term}'")
             else:
                 st.info(f"Showing {min(num_rows, total_rows)} of {total_rows} total rows")
     
     # Column information
-    st.markdown('<h3 style="color: white;">Column Information</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Column Information</h3>', unsafe_allow_html=True)
     
     # Prepare column info as a dataframe
     column_info = []
