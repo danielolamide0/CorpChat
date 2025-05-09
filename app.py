@@ -129,6 +129,24 @@ st.markdown(f"""
             color: {f'#ffffff' if theme == 'dark' else '#333333'} !important;
         }}
         
+        /* Ensure all text in sidebar also respects theme */
+        [data-testid="stSidebar"] p, 
+        [data-testid="stSidebar"] span, 
+        [data-testid="stSidebar"] label, 
+        [data-testid="stSidebar"] div {{
+            color: {f'#ffffff' if theme == 'dark' else '#333333'} !important;
+        }}
+        
+        /* Target specific Streamlit sidebar elements */
+        .sidebar .sidebar-content {{
+            background-color: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
+        }}
+        
+        /* Target all elements within sidebar - important for proper theme application */
+        .css-1d391kg, .css-1v3fvcr, .css-12oz5g7 {{
+            background-color: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
+        }}
+        
         h1, h2, h3, h4, h5, h6 {{
             font-family: 'Space Grotesk', sans-serif !important;
             font-weight: 600 !important;
@@ -137,8 +155,20 @@ st.markdown(f"""
         
         /* Sidebar styling */
         div[data-testid="stSidebar"] {{
-            background: {f'#242424' if theme == 'dark' else '#ffffff'};
-            border-right: 1px solid {f'#333333' if theme == 'dark' else '#e0e0e0'};
+            background: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
+            border-right: 1px solid {f'#333333' if theme == 'dark' else '#e0e0e0'} !important;
+        }}
+        
+        section[data-testid="stSidebar"] {{
+            background: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
+        }}
+        
+        div[data-testid="stSidebarContent"] {{
+            background: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
+        }}
+        
+        .css-6qob1r {{
+            background: {f'#242424' if theme == 'dark' else '#ffffff'} !important;
         }}
         
         /* Buttons */
@@ -206,6 +236,16 @@ st.markdown(f"""
             border-radius: 6px;
             padding: 10px 15px;
             border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+        }}
+        
+        /* Sidebar toggle button specific styles */
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] {{
+            background-color: {f'rgba(100, 100, 100, 0.5)' if theme == 'dark' else 'rgba(245, 245, 245, 0.3)'} !important;
+        }}
+        
+        /* Ensure sidebar toggle text is visible */
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] p {{
+            color: {f'#ffffff' if theme == 'dark' else '#333333'} !important;
         }}
     </style>
 """, unsafe_allow_html=True)
