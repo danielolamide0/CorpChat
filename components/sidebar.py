@@ -58,20 +58,24 @@ def render_sidebar():
             help="Upload your data file to start analysis (max 200MB)"
         )
         
-        # Force the file upload text to always be black regardless of theme
-        # This must be after the file_uploader but before other content
-        st.markdown("""
+        # Add a custom file upload container with a clear color scheme for dark mode
+        theme = 'dark' if st.session_state.get('dark_mode', False) else 'light'
+        
+        # Create a custom styled file upload label - ensure it's visible in both themes
+        st.markdown(f"""
         <style>
-        /* Target the file upload text with stronger selectors */
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] div, 
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] p, 
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] span, 
-        div[data-testid="stFileUploader"] div[data-testid="stMarkdownContainer"] p,
-        div[data-testid="stFileUploader"] label,
-        div[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"],
-        div[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p {
-            color: #000000 !important;
-            font-weight: 500 !important;
+        /* Target file upload without affecting other components */
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] div,
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] p,
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] span {
+            color: {f'#ffffff !important' if theme == 'dark' else '#242424 !important'};
+            font-weight: 500;
+        }
+        
+        /* Make the background brighter in dark mode */
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] {
+            background-color: {f'#555555 !important' if theme == 'dark' else '#f5f5f5 !important'};
+            border: 2px dashed {f'#999999' if theme == 'dark' else '#e0e0e0'};
         }
         </style>
         """, unsafe_allow_html=True)
