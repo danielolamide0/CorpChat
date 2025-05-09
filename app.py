@@ -91,7 +91,17 @@ if 'openai_api_key_available' not in st.session_state:
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
 # Theme toggle in sidebar - light mode as default
-theme = 'dark' if st.sidebar.toggle('Enable Dark Mode', value=False) else 'light'
+if 'theme' not in st.session_state:
+    st.session_state.theme = 'light'  # Default to light theme
+
+# Update theme state based on toggle
+if st.sidebar.toggle('Enable Dark Mode', value=False):
+    st.session_state.theme = 'dark'
+else:
+    st.session_state.theme = 'light'
+
+# Get current theme
+theme = st.session_state.theme
 
 # Set the appropriate background image based on theme
 if theme == 'dark':

@@ -18,23 +18,26 @@ def render_sidebar():
     """
     Render the sidebar with file upload and navigation controls
     """
+    # Get current theme from session state
+    theme = st.session_state.get('theme', 'light')
+    
     with st.sidebar:
-        # Logo and branding with CorpChat Analytics and Synaptide AI
-        st.markdown("""
+        # Logo and branding with CorpChat Analytics and Synaptide AI - theme aware
+        st.markdown(f"""
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-            <img src="data:image/jpeg;base64,{}" width="40" height="40" style="border-radius: 4px;">
+            <img src="data:image/jpeg;base64,{get_base64_of_file("assets/synaptide_logo.jpeg")}" width="40" height="40" style="border-radius: 4px;">
             <div>
-                <h2 style="margin: 0; padding: 0; font-size: 1.4rem; font-weight: 600; color: #242424; font-family: 'Space Grotesk', sans-serif;">CorpChat</h2>
-                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: #474747; letter-spacing: 0.05em; font-family: 'Space Grotesk', sans-serif;">POWERED BY SYNAPTIDE AI</p>
+                <h2 style="margin: 0; padding: 0; font-size: 1.4rem; font-weight: 600; color: {f'#ffffff' if theme == 'dark' else '#242424'}; font-family: 'Space Grotesk', sans-serif;">CorpChat</h2>
+                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: {f'#e0e0e0' if theme == 'dark' else '#474747'}; letter-spacing: 0.05em; font-family: 'Space Grotesk', sans-serif;">POWERED BY SYNAPTIDE AI</p>
             </div>
         </div>
-        <hr style="margin: 0 0 20px 0; padding: 0; border-color: #E0E0E0;">
-        """.format(get_base64_of_file("assets/synaptide_logo.jpeg")), unsafe_allow_html=True)
+        <hr style="margin: 0 0 20px 0; padding: 0; border-color: {f'#4a4a4a' if theme == 'dark' else '#E0E0E0'};">
+        """, unsafe_allow_html=True)
         
-        # Modern File Upload Section
-        st.markdown("""
+        # Modern File Upload Section - theme aware
+        st.markdown(f"""
         <div style="margin-bottom: 20px;">
-            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: #333333; margin-bottom: 12px; font-family: 'Space Grotesk', sans-serif;">
+            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: {f'#ffffff' if theme == 'dark' else '#333333'}; margin-bottom: 12px; font-family: 'Space Grotesk', sans-serif;">
                 DATA SOURCE
             </h3>
         </div>
@@ -55,10 +58,10 @@ def render_sidebar():
             help="Upload your data file to start analysis (max 200MB)"
         )
         
-        # Saved Files dropdown - modernized with delete option
-        st.markdown("""
+        # Saved Files dropdown - modernized with delete option - theme aware
+        st.markdown(f"""
         <div style="margin-top: 10px; margin-bottom: 10px;">
-            <h4 style="font-size: 0.9rem; color: #333333; font-family: 'Space Grotesk', sans-serif;">Saved Files</h4>
+            <h4 style="font-size: 0.9rem; color: {f'#ffffff' if theme == 'dark' else '#333333'}; font-family: 'Space Grotesk', sans-serif;">Saved Files</h4>
         </div>
         """, unsafe_allow_html=True)
         
@@ -108,7 +111,7 @@ def render_sidebar():
                             st.rerun()
                             break
         else:
-            st.markdown('<p style="color: #666; font-size: 0.9rem; font-family: \'Space Grotesk\', sans-serif;">No saved files yet. Upload a file to begin.</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="color: {f"#aaaaaa" if theme == "dark" else "#666"}; font-size: 0.9rem; font-family: \'Space Grotesk\', sans-serif;">No saved files yet. Upload a file to begin.</p>', unsafe_allow_html=True)
         
         # Sampling option for large files
         sample_size = None
@@ -150,8 +153,8 @@ def render_sidebar():
                         st.session_state.current_tab = "Upload"
                         st.rerun()
         
-        # Navigation tabs (only enabled when data is loaded)
-        st.markdown("<h4 style='margin-top:20px; color: #333333; font-family: \"Space Grotesk\", sans-serif;'>Menu</h4>", unsafe_allow_html=True)
+        # Navigation tabs (only enabled when data is loaded) - theme aware
+        st.markdown(f"<h4 style='margin-top:20px; color: {f'#ffffff' if theme == 'dark' else '#333333'}; font-family: \"Space Grotesk\", sans-serif;'>Menu</h4>", unsafe_allow_html=True)
         
         # Determine if tabs should be enabled
         tabs_enabled = st.session_state.data is not None
@@ -242,12 +245,12 @@ def render_sidebar():
             # Get data summary
             summary = get_data_summary(st.session_state.data)
             
-            # Display data stats if summary exists
+            # Display data stats if summary exists - theme aware
             if summary:
-                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
-                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: {f"#ffffff" if theme == "dark" else "#333333"}; font-family: \'Space Grotesk\', sans-serif;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: {f"#ffffff" if theme == "dark" else "#333333"}; font-family: \'Space Grotesk\', sans-serif;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: {f"#ffffff" if theme == "dark" else "#333333"}; font-family: \'Space Grotesk\', sans-serif;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: {f"#ffffff" if theme == "dark" else "#333333"}; font-family: \'Space Grotesk\', sans-serif;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
             
             # Add option to show save dialog again
             if st.button("Save to Library"):
