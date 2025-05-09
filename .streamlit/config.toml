@@ -4,8 +4,4 @@ address = "0.0.0.0"
 port = 5000
 
 [theme]
-base = "light"
-primaryColor = "#242424"
-backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F8F8F8"
-textColor = "#000000"
+# The theme will be controlled programmatically in app.py

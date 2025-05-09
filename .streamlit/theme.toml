@@ -1,0 +1,11 @@
+# Light mode theme settings
+[theme]
+base = "light"
+primaryColor = "#4F8BF9"
+backgroundColor = "#FFFFFF" 
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#242424"
+font = "sans-serif"
+
+# The theme values defined here will apply to the app by default, 
+# but will be overridden based on the toggle in app.py

@@ -6,6 +6,14 @@ from streamlit.components.v1 import html
 import time
 from datetime import datetime
 
+# Set default page configuration
+st.set_page_config(
+    page_title="CorpChat Analytics",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items=None
+)
+
 # Function to convert image to base64 for embedding in CSS
 def get_base64_of_file(file_path):
     """Convert file to base64 encoded string for embedding in HTML/CSS"""
@@ -41,13 +49,7 @@ from components.visualization_section import render_visualization_section
 from components.chat_bot import render_chat_bot, render_placeholder_chat_bot
 from utils.data_loader import load_sample_data, load_file, get_data_summary
 
-# Page configuration
-st.set_page_config(
-    page_title="Data Analysis & Visualization Dashboard",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Page configuration is set at the top of the file
 
 # Load custom CSS
 def load_css(css_file):
@@ -94,8 +96,28 @@ if 'openai_api_key_available' not in st.session_state:
 if 'theme' not in st.session_state:
     st.session_state.theme = 'light'  # Default to light theme
 
+# Create theme settings dictionary
+theme_light = {
+    "base": "light",
+    "primaryColor": "#4F8BF9",
+    "backgroundColor": "#FFFFFF",
+    "secondaryBackgroundColor": "#F0F2F6",
+    "textColor": "#242424",
+    "font": "sans-serif"
+}
+
+theme_dark = {
+    "base": "dark",
+    "primaryColor": "#4F8BF9",
+    "backgroundColor": "#0E1117",
+    "secondaryBackgroundColor": "#262730",
+    "textColor": "#FAFAFA",
+    "font": "sans-serif"
+}
+
 # Update theme state based on toggle
-if st.sidebar.toggle('Enable Dark Mode', value=False):
+use_dark_theme = st.sidebar.toggle('Enable Dark Mode', value=False)
+if use_dark_theme:
     st.session_state.theme = 'dark'
 else:
     st.session_state.theme = 'light'
