@@ -90,8 +90,8 @@ if 'openai_api_key_available' not in st.session_state:
     api_key = os.environ.get("OPENAI_API_KEY")
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
-# Apply the modern background image
-background_image_path = './assets/modern_background.svg'
+# Apply the CorpChat Analytics background image
+background_image_path = './assets/corpchat_background.svg'
 if os.path.exists(background_image_path):
     set_background(background_image_path)
 
@@ -99,39 +99,63 @@ if os.path.exists(background_image_path):
 theme = 'dark' if st.sidebar.toggle('Enable Dark Mode') else 'light'
 st.markdown(f"""
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
         .stApp {{
-            /* Background is already set by the SVG, but we add a subtle overlay for theme */
-            background-color: {'rgba(14, 17, 23, 0.92)' if theme == 'dark' else 'rgba(255, 255, 255, 0.92)'};
+            /* Background is set by the SVG, we'll just add a subtle overlay for dark/light mode */
+            background-color: {'rgba(20, 20, 20, 0.92)' if theme == 'dark' else 'rgba(255, 255, 255, 0.95)'};
         }}
-        div[class*="css"] {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        
+        /* General text styling */
+        body, .stMarkdown, p, span, label, div {{
+            font-family: 'Space Grotesk', sans-serif !important;
+            color: {'#ffffff' if theme == 'dark' else '#333333'} !important;
         }}
-        div[data-testid*="stToolbar"] {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+        
+        h1, h2, h3, h4, h5, h6 {{
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 600 !important;
+            color: {'#ffffff' if theme == 'dark' else '#242424'} !important;
         }}
+        
+        /* Sidebar styling */
         div[data-testid="stSidebar"] {{
-            background: {'#262730' if theme == 'dark' else '#ffffff'};
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+            background: {'#242424' if theme == 'dark' else '#ffffff'};
+            border-right: 1px solid {'#333333' if theme == 'dark' else '#e0e0e0'};
         }}
-        .stMarkdown, label, p, span {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
-        }}
+        
+        /* Buttons */
         .stButton > button {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'};
-            background: {'#262730' if theme == 'dark' else '#ffffff'};
+            font-family: 'Space Grotesk', sans-serif !important;
+            color: {'#ffffff' if theme == 'dark' else '#242424'};
+            background: {'#333333' if theme == 'dark' else '#ffffff'};
             border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
+        
+        /* Input elements */
+        .stTextInput input, .stSelectbox, .stMultiselect {{
+            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            background: {'#333333' if theme == 'dark' else '#ffffff'};
+            border-radius: 6px;
+        }}
+        
+        /* File upload zone */
+        div[data-testid="stFileUploadDropzone"] {{
+            background: {'#333333' if theme == 'dark' else '#ffffff'};
+            border: 2px dashed {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            border-radius: 8px;
+        }}
+        
+        /* Expanders */
         .streamlit-expanderHeader {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
-        }}
-        div[data-testid="stFileUploadDropzone"] span, .stSlider span {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
-        }}
-        .st-bq {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
-        }}
-        .css-81oif8 {{
-            color: {'#ffffff' if theme == 'dark' else '#0e1117'} !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 500 !important;
+            color: {'#ffffff' if theme == 'dark' else '#242424'} !important;
+            background: {'#333333' if theme == 'dark' else '#f9f9f9'};
+            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            border-radius: 6px;
         }}
     </style>
 """, unsafe_allow_html=True)

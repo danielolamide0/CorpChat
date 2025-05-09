@@ -19,23 +19,23 @@ def render_sidebar():
     Render the sidebar with file upload and navigation controls
     """
     with st.sidebar:
-        # Logo and branding with modern design
+        # Logo and branding with CorpChat Analytics and Synaptide AI
         st.markdown("""
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-            <img src="data:image/svg+xml;base64,{}" width="50" height="50">
+            <img src="data:image/jpeg;base64,{}" width="40" height="40" style="border-radius: 4px;">
             <div>
-                <h2 style="margin: 0; padding: 0; font-size: 1.5rem; font-weight: 600; color: #4F8BF9;">DataViz</h2>
-                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: white; letter-spacing: 0.1em;">ANALYTICS PLATFORM</p>
+                <h2 style="margin: 0; padding: 0; font-size: 1.4rem; font-weight: 600; color: #242424; font-family: 'Space Grotesk', sans-serif;">CorpChat</h2>
+                <p style="margin: 0; padding: 0; font-size: 0.8rem; color: #474747; letter-spacing: 0.05em; font-family: 'Space Grotesk', sans-serif;">POWERED BY SYNAPTIDE AI</p>
             </div>
         </div>
-        <hr style="margin: 0 0 20px 0; padding: 0; border-color: rgba(255, 255, 255, 0.1);">
-        """.format(get_base64_of_file("assets/modern_logo.svg")), unsafe_allow_html=True)
+        <hr style="margin: 0 0 20px 0; padding: 0; border-color: #E0E0E0;">
+        """.format(get_base64_of_file("assets/synaptide_logo.jpeg")), unsafe_allow_html=True)
         
         # Modern File Upload Section
         st.markdown("""
         <div style="margin-bottom: 20px;">
-            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: white; margin-bottom: 12px;">
-                📁 DATA SOURCE
+            <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: #333333; margin-bottom: 12px; font-family: 'Space Grotesk', sans-serif;">
+                DATA SOURCE
             </h3>
         </div>
         """, unsafe_allow_html=True)
