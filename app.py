@@ -95,56 +95,56 @@ background_image_path = './assets/corpchat_background.svg'
 if os.path.exists(background_image_path):
     set_background(background_image_path)
 
-# Theme toggle
-theme = 'dark' if st.sidebar.toggle('Enable Dark Mode') else 'light'
+# Always use dark theme for the gray/black/white design
 st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
         .stApp {{
-            /* Background is set by the SVG, we'll just add a subtle overlay for dark/light mode */
-            background-color: {'rgba(20, 20, 20, 0.92)' if theme == 'dark' else 'rgba(255, 255, 255, 0.95)'};
+            /* Background is set by the SVG */
+            background-color: rgba(20, 20, 20, 0.3);
         }}
         
         /* General text styling */
         body, .stMarkdown, p, span, label, div {{
             font-family: 'Space Grotesk', sans-serif !important;
-            color: {'#ffffff' if theme == 'dark' else '#333333'} !important;
+            color: #ffffff !important;
         }}
         
         h1, h2, h3, h4, h5, h6 {{
             font-family: 'Space Grotesk', sans-serif !important;
             font-weight: 600 !important;
-            color: {'#ffffff' if theme == 'dark' else '#242424'} !important;
+            color: #ffffff !important;
         }}
         
         /* Sidebar styling */
         div[data-testid="stSidebar"] {{
-            background: {'#242424' if theme == 'dark' else '#ffffff'};
-            border-right: 1px solid {'#333333' if theme == 'dark' else '#e0e0e0'};
+            background: #242424;
+            border-right: 1px solid #333333;
         }}
         
         /* Buttons */
         .stButton > button {{
             font-family: 'Space Grotesk', sans-serif !important;
-            color: {'#ffffff' if theme == 'dark' else '#242424'};
-            background: {'#333333' if theme == 'dark' else '#ffffff'};
-            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            color: #ffffff;
+            background: #333333;
+            border: 1px solid #4a4a4a;
             border-radius: 6px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
         
         /* Input elements */
         .stTextInput input, .stSelectbox, .stMultiselect {{
-            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
-            background: {'#333333' if theme == 'dark' else '#ffffff'};
+            border: 1px solid #4a4a4a;
+            background: #333333;
             border-radius: 6px;
+            color: #ffffff;
         }}
         
         /* File upload zone */
         div[data-testid="stFileUploadDropzone"] {{
-            background: {'#333333' if theme == 'dark' else '#ffffff'};
-            border: 2px dashed {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            background: #333333;
+            border: 2px dashed #4a4a4a;
             border-radius: 8px;
         }}
         
@@ -152,10 +152,34 @@ st.markdown(f"""
         .streamlit-expanderHeader {{
             font-family: 'Space Grotesk', sans-serif !important;
             font-weight: 500 !important;
-            color: {'#ffffff' if theme == 'dark' else '#242424'} !important;
-            background: {'#333333' if theme == 'dark' else '#f9f9f9'};
-            border: 1px solid {'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            color: #ffffff !important;
+            background: #333333;
+            border: 1px solid #4a4a4a;
             border-radius: 6px;
+        }}
+        
+        /* Metrics */
+        div[data-testid="stMetric"] {{
+            background-color: rgba(51, 51, 51, 0.7);
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #4a4a4a;
+        }}
+        
+        div[data-testid="stMetric"] > div:first-child {{
+            color: #ffffff !important;
+        }}
+        
+        div[data-testid="stMetric"] > div:nth-child(2) {{
+            color: #e0e0e0 !important;
+        }}
+        
+        /* Make dataframes more visible */
+        div[data-testid="stDataFrame"] {{
+            background-color: rgba(51, 51, 51, 0.7);
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #4a4a4a;
         }}
     </style>
 """, unsafe_allow_html=True)
@@ -165,15 +189,15 @@ st.markdown(f"""
 st.markdown("""
 <div class="page-header">
     <div>
-        <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #242424;">
+        <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #ffffff;">
             CorpChat Analytics
         </h1>
-        <p class="page-header-description" style="font-family: 'Space Grotesk', sans-serif; color: #474747;">
+        <p class="page-header-description" style="font-family: 'Space Grotesk', sans-serif; color: #e0e0e0;">
             Transform your data into actionable insights with powerful analytics and Synaptide AI
         </p>
     </div>
     <div>
-        <div style="background-color:#F5F5F5; border-radius:8px; padding:6px 10px; font-size:12px; color:#333333; border: 1px solid #E0E0E0; font-family: 'Space Grotesk', sans-serif;">
+        <div style="background-color:#333333; border-radius:8px; padding:6px 10px; font-size:12px; color:#ffffff; border: 1px solid #4a4a4a; font-family: 'Space Grotesk', sans-serif;">
             <span style="font-weight:600;">Last updated:</span> 
             {} 
         </div>
@@ -246,7 +270,7 @@ if st.session_state.current_tab == "Upload":
         
         # Feature grid layout inspired by modern analytics dashboards
         st.markdown("""
-        <h3 style="margin-bottom:20px; font-size:1.4rem; font-weight:600; color:#242424; font-family:'Space Grotesk', sans-serif;">
+        <h3 style="margin-bottom:20px; font-size:1.4rem; font-weight:600; color:#ffffff; font-family:'Space Grotesk', sans-serif;">
             Key Features & Capabilities
         </h3>
         """, unsafe_allow_html=True)

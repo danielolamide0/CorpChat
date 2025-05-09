@@ -21,7 +21,7 @@ def render_visualization_section():
         st.warning("No data loaded yet. Please upload a file.")
         return
     
-    st.markdown('<h1 style="color: white;">Data Visualization</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Data Visualization</h1>', unsafe_allow_html=True)
     
     # Get column types for better column selection suggestions
     column_types = get_column_types(st.session_state.data)
@@ -66,7 +66,7 @@ def render_visualization_section():
     
     # Display saved visualizations
     if st.session_state.visualizations:
-        st.markdown('<h3 style="color: white;">Your Visualizations</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Your Visualizations</h3>', unsafe_allow_html=True)
         
         for i, viz in enumerate(st.session_state.visualizations):
             with st.expander(f"Visualization {i+1}: {viz['title']}", expanded=i == 0):
@@ -86,7 +86,7 @@ def render_bar_chart_config(column_types):
     Parameters:
     - column_types: Dictionary mapping column names to their types
     """
-    st.markdown('<h3 style="color: white;">Bar Chart Configuration</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Bar Chart Configuration</h3>', unsafe_allow_html=True)
     
     # Get categorical columns for x-axis suggestions
     categorical_columns = [col for col, type_ in column_types.items() 
