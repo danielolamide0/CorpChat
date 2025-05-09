@@ -58,6 +58,24 @@ def render_sidebar():
             help="Upload your data file to start analysis (max 200MB)"
         )
         
+        # Force the file upload text to always be black regardless of theme
+        # This must be after the file_uploader but before other content
+        st.markdown("""
+        <style>
+        /* Target the file upload text with stronger selectors */
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] div, 
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] p, 
+        div[data-testid="stFileUploader"] div[data-testid="stFileUploadDropzone"] span, 
+        div[data-testid="stFileUploader"] div[data-testid="stMarkdownContainer"] p,
+        div[data-testid="stFileUploader"] label,
+        div[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"],
+        div[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p {
+            color: #000000 !important;
+            font-weight: 500 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         # Saved Files dropdown - modernized with delete option - theme aware
         st.markdown(f"""
         <div style="margin-top: 10px; margin-bottom: 10px;">

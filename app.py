@@ -349,18 +349,6 @@ if st.session_state.data is not None and hasattr(st.session_state, 'data_summary
 # Render sidebar (file upload and navigation)
 render_sidebar()
 
-# Force the file upload text to be black regardless of theme
-st.markdown("""
-<style>
-div[data-testid="stFileUploadDropzone"] p,
-div[data-testid="stFileUploadDropzone"] [data-testid="stMarkdownContainer"] p,
-div[data-testid="stFileUploadDropzone"] span,
-div[data-testid="stFileUploadDropzone"] div {
-    color: #000000 !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
 # Main content area based on selected tab
 if st.session_state.current_tab == "Upload":
     if st.session_state.data is not None:
