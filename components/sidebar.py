@@ -89,14 +89,17 @@ def render_sidebar():
                                 
                                 # Show success message with data summary
                                 summary = get_data_summary(df)
-                                st.success(f"Loaded: {summary['rows']} rows, {summary['columns']} columns")
+                                if summary:
+                                    st.success(f"Loaded: {summary['rows']} rows, {summary['columns']} columns")
+                                else:
+                                    st.success(f"File loaded successfully")
                                 
                                 # Automatically switch to data view
                                 st.session_state.current_tab = "Upload"
                                 st.rerun()
             
             with col2:
-                if st.button("🗑️", key="delete_saved_file", use_container_width=True):
+                if st.button("Delete", key="delete_saved_file", use_container_width=True):
                     # Find and remove the selected file
                     for i, saved_file in enumerate(st.session_state.saved_files):
                         if saved_file["name"] == selected_file:
@@ -135,7 +138,10 @@ def render_sidebar():
                         
                         # Show success message with data summary
                         summary = get_data_summary(df)
-                        st.success(f"Data loaded successfully: {summary['rows']} rows, {summary['columns']} columns")
+                        if summary:
+                            st.success(f"Data loaded successfully: {summary['rows']} rows, {summary['columns']} columns")
+                        else:
+                            st.success(f"Data loaded successfully")
                         
                         # Set flag to show save dialog
                         st.session_state.show_save_dialog = True
@@ -236,11 +242,12 @@ def render_sidebar():
             # Get data summary
             summary = get_data_summary(st.session_state.data)
             
-            # Display data stats
-            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
+            # Display data stats if summary exists
+            if summary:
+                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
             
             # Add option to show save dialog again
             if st.button("Save to Library"):

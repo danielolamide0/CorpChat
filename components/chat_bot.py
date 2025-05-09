@@ -152,7 +152,7 @@ def render_chat_bot():
     """
     Render the chat bot interface for data analysis assistance
     """
-    st.markdown('<h1 style="color: white;">📊 Business Intelligence Assistant</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Business Intelligence Assistant</h1>', unsafe_allow_html=True)
     
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -321,7 +321,7 @@ def render_placeholder_chat_bot():
     """
     Render a placeholder for the chat bot before API keys are set up
     """
-    st.markdown('<h1 style="color: white;">📊 Business Intelligence Assistant</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Business Intelligence Assistant</h1>', unsafe_allow_html=True)
     st.info("This AI-powered assistant provides concise business insights and actionable recommendations from your data.")
     
     # Check if we have data loaded
@@ -332,7 +332,7 @@ def render_placeholder_chat_bot():
     # Display information about the dataset
     try:
         df = st.session_state.data
-        st.markdown('<h3 style="color: white;">Current Dataset</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 style="color: white; font-family: \'Space Grotesk\', sans-serif;">Current Dataset</h3>', unsafe_allow_html=True)
         st.write(f"Using dataset: {st.session_state.file_name}")
         st.write(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")
         
