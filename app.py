@@ -233,9 +233,12 @@ st.markdown(f"""
             border-radius: 8px;
         }}
         
-        /* Fix for file dropzone text color in dark mode */
-        div[data-testid="stFileUploadDropzone"] p {{
-            color: {f'#242424' if theme == 'dark' else '#333333'} !important;
+        /* Fix for file dropzone text color in dark mode - stronger selector to override other styles */
+        div[data-testid="stFileUploadDropzone"] p,
+        div[data-testid="stFileUploadDropzone"] [data-testid="stMarkdownContainer"] p,
+        div[data-testid="stFileUploadDropzone"] span,
+        div[data-testid="stFileUploadDropzone"] div {{
+            color: {f'black' if theme == 'dark' else '#333333'} !important;
         }}
         
         /* Expanders */
