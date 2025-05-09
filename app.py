@@ -90,61 +90,69 @@ if 'openai_api_key_available' not in st.session_state:
     api_key = os.environ.get("OPENAI_API_KEY")
     st.session_state.openai_api_key_available = api_key is not None and api_key != ""
 
-# Apply the CorpChat Analytics background image
-background_image_path = './assets/corpchat_background.svg'
+# Theme toggle in sidebar - light mode as default
+theme = 'dark' if st.sidebar.toggle('Enable Dark Mode', value=False) else 'light'
+
+# Set the appropriate background image based on theme
+if theme == 'dark':
+    background_image_path = './assets/corpchat_background.svg'
+else:
+    background_image_path = './assets/light_background.svg'
+
+# Apply the appropriate background
 if os.path.exists(background_image_path):
     set_background(background_image_path)
 
-# Always use dark theme for the gray/black/white design
+# Apply theme styling
 st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
         .stApp {{
             /* Background is set by the SVG */
-            background-color: rgba(20, 20, 20, 0.3);
+            background-color: {f'rgba(20, 20, 20, 0.3)' if theme == 'dark' else 'rgba(255, 255, 255, 0.3)'};
         }}
         
         /* General text styling */
         body, .stMarkdown, p, span, label, div {{
             font-family: 'Space Grotesk', sans-serif !important;
-            color: #ffffff !important;
+            color: {f'#ffffff' if theme == 'dark' else '#333333'} !important;
         }}
         
         h1, h2, h3, h4, h5, h6 {{
             font-family: 'Space Grotesk', sans-serif !important;
             font-weight: 600 !important;
-            color: #ffffff !important;
+            color: {f'#ffffff' if theme == 'dark' else '#242424'} !important;
         }}
         
         /* Sidebar styling */
         div[data-testid="stSidebar"] {{
-            background: #242424;
-            border-right: 1px solid #333333;
+            background: {f'#242424' if theme == 'dark' else '#ffffff'};
+            border-right: 1px solid {f'#333333' if theme == 'dark' else '#e0e0e0'};
         }}
         
         /* Buttons */
         .stButton > button {{
             font-family: 'Space Grotesk', sans-serif !important;
-            color: #ffffff;
-            background: #333333;
-            border: 1px solid #4a4a4a;
+            color: {f'#ffffff' if theme == 'dark' else '#242424'};
+            background: {f'#333333' if theme == 'dark' else '#f5f5f5'};
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
             border-radius: 6px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
         
         /* Input elements */
         .stTextInput input, .stSelectbox, .stMultiselect {{
-            border: 1px solid #4a4a4a;
-            background: #333333;
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+            background: {f'#333333' if theme == 'dark' else '#ffffff'};
             border-radius: 6px;
-            color: #ffffff;
+            color: {f'#ffffff' if theme == 'dark' else '#333333'};
         }}
         
         /* File upload zone */
         div[data-testid="stFileUploadDropzone"] {{
-            background: #333333;
-            border: 2px dashed #4a4a4a;
+            background: {f'#333333' if theme == 'dark' else '#f5f5f5'};
+            border: 2px dashed {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
             border-radius: 8px;
         }}
         
@@ -152,58 +160,66 @@ st.markdown(f"""
         .streamlit-expanderHeader {{
             font-family: 'Space Grotesk', sans-serif !important;
             font-weight: 500 !important;
-            color: #ffffff !important;
-            background: #333333;
-            border: 1px solid #4a4a4a;
+            color: {f'#ffffff' if theme == 'dark' else '#242424'} !important;
+            background: {f'#333333' if theme == 'dark' else '#f9f9f9'};
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
             border-radius: 6px;
         }}
         
         /* Metrics */
         div[data-testid="stMetric"] {{
-            background-color: rgba(51, 51, 51, 0.7);
+            background-color: {f'rgba(51, 51, 51, 0.7)' if theme == 'dark' else 'rgba(245, 245, 245, 0.7)'};
             border-radius: 6px;
             padding: 10px;
-            border: 1px solid #4a4a4a;
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
         }}
         
         div[data-testid="stMetric"] > div:first-child {{
-            color: #ffffff !important;
+            color: {f'#ffffff' if theme == 'dark' else '#242424'} !important;
         }}
         
         div[data-testid="stMetric"] > div:nth-child(2) {{
-            color: #e0e0e0 !important;
+            color: {f'#e0e0e0' if theme == 'dark' else '#666666'} !important;
         }}
         
         /* Make dataframes more visible */
         div[data-testid="stDataFrame"] {{
-            background-color: rgba(51, 51, 51, 0.7);
+            background-color: {f'rgba(51, 51, 51, 0.7)' if theme == 'dark' else 'rgba(245, 245, 245, 0.7)'};
             border-radius: 6px;
             padding: 10px;
-            border: 1px solid #4a4a4a;
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
+        }}
+        
+        /* Toggle switch styling */
+        div[data-testid="stCheckbox"] {{
+            background-color: {f'rgba(51, 51, 51, 0.3)' if theme == 'dark' else 'rgba(245, 245, 245, 0.3)'};
+            border-radius: 6px;
+            padding: 10px 15px;
+            border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'};
         }}
     </style>
 """, unsafe_allow_html=True)
 
 # Use the above get_base64_of_file function
-# Professional header inspired by modern analytics dashboards
-st.markdown("""
+# Professional header inspired by modern analytics dashboards with theme-specific colors
+st.markdown(f"""
 <div class="page-header">
     <div>
-        <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #ffffff;">
+        <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: {f'#ffffff' if theme == 'dark' else '#242424'};">
             CorpChat Analytics
         </h1>
-        <p class="page-header-description" style="font-family: 'Space Grotesk', sans-serif; color: #e0e0e0;">
+        <p class="page-header-description" style="font-family: 'Space Grotesk', sans-serif; color: {f'#e0e0e0' if theme == 'dark' else '#666666'};">
             Transform your data into actionable insights with powerful analytics and Synaptide AI
         </p>
     </div>
     <div>
-        <div style="background-color:#333333; border-radius:8px; padding:6px 10px; font-size:12px; color:#ffffff; border: 1px solid #4a4a4a; font-family: 'Space Grotesk', sans-serif;">
+        <div style="background-color:{f'#333333' if theme == 'dark' else '#f5f5f5'}; border-radius:8px; padding:6px 10px; font-size:12px; color:{f'#ffffff' if theme == 'dark' else '#333333'}; border: 1px solid {f'#4a4a4a' if theme == 'dark' else '#e0e0e0'}; font-family: 'Space Grotesk', sans-serif;">
             <span style="font-weight:600;">Last updated:</span> 
-            {} 
+            {datetime.now().strftime("%b %d, %Y")} 
         </div>
     </div>
 </div>
-""".format(datetime.now().strftime("%b %d, %Y")), unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Add key metrics bar if data is loaded
 if st.session_state.data is not None and hasattr(st.session_state, 'data_summary') and st.session_state.data_summary:
@@ -243,22 +259,22 @@ if st.session_state.current_tab == "Upload":
     if st.session_state.data is not None:
         render_data_preview()
     else:
-        # Welcome banner with call to action
+        # Welcome banner with call to action - theme aware
         st.markdown(f"""
-        <div class="dashboard-card" style="background-color:#242424; margin-bottom:30px; border:none; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        <div class="dashboard-card" style="background-color:{f'#242424' if theme == 'dark' else '#f9f9f9'}; margin-bottom:30px; border:{f'none' if theme == 'dark' else '1px solid #e0e0e0'}; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; padding:25px;">
                 <div style="max-width:70%;">
-                    <h2 style="color:white; margin-top:0; font-size:1.8rem; font-weight:600; font-family:'Space Grotesk', sans-serif;">
+                    <h2 style="color:{f'white' if theme == 'dark' else '#242424'}; margin-top:0; font-size:1.8rem; font-weight:600; font-family:'Space Grotesk', sans-serif;">
                         Welcome to CorpChat Analytics
                     </h2>
-                    <p style="color:rgba(255,255,255,0.9); margin-bottom:20px; font-size:1rem; line-height:1.5; font-family:'Space Grotesk', sans-serif;">
+                    <p style="color:{f'rgba(255,255,255,0.9)' if theme == 'dark' else '#555555'}; margin-bottom:20px; font-size:1rem; line-height:1.5; font-family:'Space Grotesk', sans-serif;">
                         A comprehensive solution for analyzing, visualizing, and extracting insights from your business data.
                         Powered by Synaptide AI for intelligent analysis and insights.
                     </p>
-                    <div style="background-color:white; border:none; 
+                    <div style="background-color:{f'#333333' if theme == 'dark' else 'white'}; border:{f'1px solid #4a4a4a' if theme == 'dark' else 'none'}; 
                         border-radius:6px; padding:12px 16px; margin-bottom:10px; display:inline-flex; align-items:center; gap:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
                         <span style="font-size:18px;">👆</span>
-                        <span style="color:#242424; font-size:0.95rem; font-weight:500; font-family:'Space Grotesk', sans-serif;">Upload a file using the sidebar to get started</span>
+                        <span style="color:{f'white' if theme == 'dark' else '#242424'}; font-size:0.95rem; font-weight:500; font-family:'Space Grotesk', sans-serif;">Upload a file using the sidebar to get started</span>
                     </div>
                 </div>
                 <div style="min-width:150px; text-align:center;">
@@ -268,9 +284,9 @@ if st.session_state.current_tab == "Upload":
         </div>
         """, unsafe_allow_html=True)
         
-        # Feature grid layout inspired by modern analytics dashboards
-        st.markdown("""
-        <h3 style="margin-bottom:20px; font-size:1.4rem; font-weight:600; color:#ffffff; font-family:'Space Grotesk', sans-serif;">
+        # Feature grid layout inspired by modern analytics dashboards with theme-specific styling
+        st.markdown(f"""
+        <h3 style="margin-bottom:20px; font-size:1.4rem; font-weight:600; color:{f'#ffffff' if theme == 'dark' else '#242424'}; font-family:'Space Grotesk', sans-serif;">
             Key Features & Capabilities
         </h3>
         """, unsafe_allow_html=True)
