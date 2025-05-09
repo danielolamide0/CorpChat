@@ -58,7 +58,7 @@ def render_sidebar():
         # Saved Files dropdown - modernized with delete option
         st.markdown("""
         <div style="margin-top: 10px; margin-bottom: 10px;">
-            <h4 style="font-size: 0.9rem; color: white;">📁 Saved Files</h4>
+            <h4 style="font-size: 0.9rem; color: #333333; font-family: 'Space Grotesk', sans-serif;">Saved Files</h4>
         </div>
         """, unsafe_allow_html=True)
         
@@ -105,7 +105,7 @@ def render_sidebar():
                             st.rerun()
                             break
         else:
-            st.markdown('<p style="color: #aaa; font-size: 0.9rem;">No saved files yet. Upload a file to begin.</p>', unsafe_allow_html=True)
+            st.markdown('<p style="color: #666; font-size: 0.9rem; font-family: \'Space Grotesk\', sans-serif;">No saved files yet. Upload a file to begin.</p>', unsafe_allow_html=True)
         
         # Sampling option for large files
         sample_size = None
@@ -145,7 +145,7 @@ def render_sidebar():
                         st.rerun()
         
         # Navigation tabs (only enabled when data is loaded)
-        st.markdown("<h4 style='margin-top:20px'>🧭 Menu</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:20px; color: #333333; font-family: \"Space Grotesk\", sans-serif;'>Menu</h4>", unsafe_allow_html=True)
         
         # Determine if tabs should be enabled
         tabs_enabled = st.session_state.data is not None
@@ -181,13 +181,13 @@ def render_sidebar():
         
         # Upload & Preview button
         active_class = "background-color: #E8F0FE;" if active_tab == "Upload" else ""
-        if st.button("📋 Upload & Preview", disabled=False, key="nav_upload"):
+        if st.button("Upload & Preview", disabled=False, key="nav_upload"):
             st.session_state.current_tab = "Upload"
             st.rerun()
         
         # Analysis button
         active_class = "background-color: #E8F0FE;" if active_tab == "Analysis" else ""
-        if st.button("📈 Analysis", disabled=not tabs_enabled, key="nav_analysis"):
+        if st.button("Analysis", disabled=not tabs_enabled, key="nav_analysis"):
             if tabs_enabled:
                 st.session_state.current_tab = "Analysis"
                 st.rerun()
@@ -196,7 +196,7 @@ def render_sidebar():
         
         # Visualization button
         active_class = "background-color: #E8F0FE;" if active_tab == "Visualization" else ""
-        if st.button("📊 Visualization", disabled=not tabs_enabled, key="nav_visualization"):
+        if st.button("Visualization", disabled=not tabs_enabled, key="nav_visualization"):
             if tabs_enabled:
                 st.session_state.current_tab = "Visualization"
                 st.rerun()
@@ -205,7 +205,7 @@ def render_sidebar():
                 
         # Business AI button
         active_class = "background-color: #E8F0FE;" if active_tab == "Chat Bot" else ""
-        if st.button("🤖 Business AI", disabled=not tabs_enabled, key="nav_chatbot"):
+        if st.button("Business AI", disabled=not tabs_enabled, key="nav_chatbot"):
             if tabs_enabled:
                 st.session_state.current_tab = "Chat Bot"
                 st.rerun()
@@ -237,10 +237,10 @@ def render_sidebar():
             summary = get_data_summary(st.session_state.data)
             
             # Display data stats
-            st.markdown(f'<div style="color: white;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: white;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: white;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div style="color: white;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Rows:</strong> {summary["rows"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Columns:</strong> {summary["columns"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Missing Values:</strong> {summary["missing_values"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="color: #333333; font-family: \'Space Grotesk\', sans-serif;"><strong>Memory Usage:</strong> {summary["memory_usage"]:.2f} MB</div>', unsafe_allow_html=True)
             
             # Add option to show save dialog again
             if st.button("Save to Library"):
