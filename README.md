@@ -1,3 +1,5 @@
+# 🚀 Demo: This file was edited and pushed to GitHub by AI assistant
+
 # CorpChat Analytics
 
 A comprehensive data analysis and visualization dashboard powered by Synaptide AI. Transform your business data into actionable insights with powerful analytics tools and natural language AI assistance.
