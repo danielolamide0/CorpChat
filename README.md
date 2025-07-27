@@ -15,6 +15,26 @@ A comprehensive data analysis and visualization dashboard powered by Synaptide A
 ## 🎯 Random Emoji Challenge
 Can you spot all the emojis in this README? 🕵️‍♂️
 
+## 🛠️ Tech Stack Visualization
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   AI/ML         │
+│   ┌─────────┐   │    │   ┌─────────┐   │    │   ┌─────────┐   │
+│   │Streamlit│   │    │   │ Pandas  │   │    │   │ OpenAI  │   │
+│   │   🎨    │   │    │   │   📊    │   │    │   │   🤖    │   │
+│   └─────────┘   │    │   └─────────┘   │    │   └─────────┘   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+## 🚀 Quick Start Guide
+1. **Clone** 📥 `git clone https://github.com/danielolamide0/CorpChat.git`
+2. **Install** ⚙️ `pip install -r requirements.txt`
+3. **Run** 🏃‍♂️ `streamlit run app.py`
+4. **Enjoy** 🎉 Your data analytics journey begins!
+
+## 🎵 Random Music Recommendation
+While coding this project, try listening to: "Synthwave" playlist on Spotify! 🎧
+
 ## Features
 
 - **Interactive Data Upload**: Support for CSV and Excel files with automatic type detection
