@@ -35,6 +35,28 @@ Can you spot all the emojis in this README? 🕵️‍♂️
 ## 🎵 Random Music Recommendation
 While coding this project, try listening to: "Synthwave" playlist on Spotify! 🎧
 
+## 📊 Project Stats
+- **Lines of Code**: Countless (we lost count after the 1000th line 😅)
+- **Cups of Coffee**: ☕☕☕☕☕ (at least 5 per coding session)
+- **Bug Fixes**: 42 (the answer to everything)
+- **Emojis Used**: Too many to count! 🎉
+
+## 🏆 Contributor Hall of Fame
+- **👑 Lead Developer**: danielolamide0 (that's you!)
+- **🤖 AI Assistant**: Your friendly neighborhood AI
+- **☕ Coffee Supplier**: Local coffee shop
+- **🎵 Music Provider**: Spotify's Synthwave playlist
+
+## 😄 Random Developer Joke
+Why do programmers prefer dark mode?
+Because light attracts bugs! 🐛
+
+## 🎲 Random Feature Ideas
+- [ ] Add a "panic button" that makes everything work
+- [ ] Implement teleportation for instant data loading
+- [ ] Add a "coffee detector" that pauses work when you need a break
+- [ ] Create a "bug whisperer" mode that talks to your errors
+
 ## Features
 
 - **Interactive Data Upload**: Support for CSV and Excel files with automatic type detection
