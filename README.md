@@ -181,3 +181,15 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For questions or support, please open an issue on GitHub.
+
+## ❓ Frequently Asked Questions (FAQ)
+- **How do I run the app locally?**
+  - Install deps and run: `pip install -r requirements.txt && streamlit run app.py`
+- **Where do I put my OpenAI key?**
+  - Set it in your environment: `export OPENAI_API_KEY="your-key"`
+- **Why does upload fail for large files?**
+  - Check Streamlit file size limits and your browser memory; try smaller files first.
+- **How do I reset the app state?**
+  - Use the "Rerun" button in Streamlit or restart the process.
+- **Can I deploy this?**
+  - Yes. Try Streamlit Cloud or a VPS. Ensure `OPENAI_API_KEY` is set in deployment secrets.
